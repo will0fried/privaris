@@ -16,6 +16,23 @@
     });
   });
 
+  /* ---------- Menu mobile (burger) ---------- */
+  var nav = document.querySelector('nav');
+  var burger = document.getElementById('navBurger');
+  var navLinks = document.getElementById('navLinks');
+  if (nav && burger && navLinks) {
+    var setOpen = function (open) {
+      nav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
+    burger.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    window.addEventListener('resize', function () { if (window.innerWidth > 980) { setOpen(false); } });
+  }
+
   /* ---------- Radar des domaines (sonar animé) ---------- */
   var cv = document.getElementById('radar');
   var dataEl = document.getElementById('skills-data');

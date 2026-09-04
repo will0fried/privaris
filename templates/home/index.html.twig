@@ -8,10 +8,14 @@
     <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">
       {{ include('_logo.svg.twig') }} PRIVARIS
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#domaines">Domaines</a><a href="#journal">Journal</a><a href="#preuves">Preuves</a><a href="#apropos">À propos</a>
     </div>
     <a class="nav-cta" href="#contact">S'abonner</a>
+    <button type="button" class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+      <svg class="ic-menu" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <svg class="ic-x" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </nav>
 
