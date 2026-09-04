@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales — Privaris{% endblock %}
+{% block meta_description %}Mentions légales du site Privaris.{% endblock %}
+
+{% block body %}
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
+    <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+  </div>
+</nav>
+
+<main class="legal wrap col">
+  <div class="lbl">Informations légales</div>
+  <h1>Mentions légales</h1>
+
+  <h2>Éditeur du site</h2>
+  <p>Le site <strong>Privaris</strong> est édité à titre <strong>non professionnel</strong> par une personne physique. Conformément à l'article 6, III, 2° de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), l'éditeur, personne physique non professionnelle, a choisi de ne pas rendre publiques ses coordonnées personnelles&nbsp;; son identité est tenue à la disposition de l'hébergeur.</p>
+  <p>Contact&nbsp;: <a href="mailto:{{ site_email }}">{{ site_email }}</a>.</p>
+
+  <h2>Directeur de la publication</h2>
+  <p>« W. », pour Privaris. Toute demande peut être adressée par e-mail à <a href="mailto:{{ site_email }}">{{ site_email }}</a>.</p>
+
+  <h2>Hébergeur</h2>
+  <p><strong>PlanetHoster</strong><br>
+  4416 Louis-B.-Mayer, Laval (Québec) H7P 0G1, Canada<br>
+  Site&nbsp;: <a href="https://www.planethoster.com" target="_blank" rel="noopener">planethoster.com</a></p>
+  <p class="note-inline">Les coordonnées exactes de l'hébergeur (y compris son bureau français) figurent sur la page « mentions légales » de PlanetHoster&nbsp;; à confirmer au moment de la mise en ligne.</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>L'ensemble des contenus de ce site (textes, articles, logo, éléments graphiques, code) est la propriété de l'éditeur, sauf mention contraire. Toute reproduction ou réutilisation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+
+  <h2>Responsabilité</h2>
+  <p>Les contenus techniques publiés sur ce site le sont à titre informatif et pédagogique. Toute manipulation décrite a été réalisée sur des systèmes appartenant à l'éditeur ou avec une autorisation écrite du propriétaire. L'éditeur ne saurait être tenu responsable d'un usage détourné de ces informations. Rappel&nbsp;: accéder ou se maintenir dans un système de traitement automatisé de données sans autorisation est puni par la loi (articles 323-1 et suivants du Code pénal).</p>
+
+  <h2>Liens externes</h2>
+  <p>Ce site peut contenir des liens vers des sites tiers. L'éditeur n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu.</p>
+
+  <p class="upd">Dernière mise à jour&nbsp;: {{ "now"|date("d/m/Y") }}</p>
+</main>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+{% endblock %}

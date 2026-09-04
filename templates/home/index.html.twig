@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Privaris — Sécurité offensive{% endblock %}
+
+{% block body %}
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">
+      {{ include('_logo.svg.twig') }} PRIVARIS
+    </a>
+    <div class="nav-links">
+      <a href="#domaines">Domaines</a><a href="#journal">Journal</a><a href="#preuves">Preuves</a><a href="#apropos">À propos</a>
+    </div>
+    <a class="nav-cta" href="#contact">S'abonner</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-l">
+      <div class="h-tag"><span>SÉCURITÉ OFFENSIVE</span><span>·</span><span>BESANÇON</span><span>·</span><span><b>● CARNET PUBLIC</b></span></div>
+      <h1>Repérer les failles <em>avant</em> ceux qui en profitent.</h1>
+      <p class="lead">Master en cybersécurité, je décortique la sécurité offensive&nbsp;: comment un attaquant entre dans un réseau, ce qu'il y trouve, et comment s'en protéger. Je publie tout ici, expliqué clairement — pour celles et ceux que le sujet passionne autant que moi.</p>
+      <div class="ctas">
+        <a class="btn" href="#journal">Lire le journal</a>
+        <a class="btn ghost" href="#contact">S'abonner</a>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar"><i class="tb1"></i><i class="tb2"></i><i class="tb3"></i><span>privaris — ~/poste-de-terrain</span></div>
+      <div class="term-body" id="term"></div>
+    </div>
+  </div>
+</section>
+
+<section id="domaines">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="lbl">Domaines</div><h2>Les sujets que je décortique.</h2></div>
+      <p>Les grands domaines de la sécurité offensive que je couvre dans le journal — de la reconnaissance d'un réseau jusqu'au cloud. Le radar en donne la carte&nbsp;; les articles, le détail.</p>
+    </div>
+    <div class="comp">
+      <div class="radar-wrap">
+        <canvas id="radar" width="520" height="520" aria-label="Radar des domaines couverts en sécurité offensive"></canvas>
+        <div class="radar-legend"><span><i style="background:#F6A733"></i>Domaines que je couvre</span></div>
+      </div>
+      <div class="matrix">
+        {% for skill in skills %}
+        <div class="mrow"><div class="mk">{{ skill.name }}</div></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
+      <p>Des labs, des décryptages, des writeups et de la veille — chaque entrée suit le même relevé&nbsp;: l'objectif, la méthode, ce que j'observe, ce que j'en retiens. Du concret, sans jargon inutile. C'est ici que tout se passe.</p>
+    </div>
+    <div class="cats" role="group" aria-label="Filtrer le carnet">
+      <button class="cat on" data-k="all">Tout</button>
+      <button class="cat" data-k="lab">Labs</button>
+      <button class="cat" data-k="wri">Writeups</button>
+      <button class="cat" data-k="dec">Décryptages</button>
+      <button class="cat" data-k="cou">Coulisses</button>
+    </div>
+    <div class="ledger" id="ledger">
+      <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
+      {% for entry in entries %}
+      <div class="row" data-k="{{ entry.type.cssClass }}">
+        <span class="id">{{ entry.reference }}</span>
+        <span class="k {{ entry.type.cssClass }}">{{ entry.type.label }}</span>
+        <span class="t">
+          {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+          <small>{{ entry.excerpt }}</small>
+        </span>
+        <span class="s{% if not entry.published %} live{% endif %}">{{ entry.statusLabel }}</span>
+      </div>
+      {% else %}
+      <div class="row"><span class="t">Le premier article arrive très bientôt.</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="preuves">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="lbl">Preuves</div><h2>De quoi se faire une idée.</h2></div>
+      <p>Rien à croire sur parole&nbsp;: mon profil, mes travaux et ma pratique sont publics et vérifiables d'un clic. C'est la meilleure façon de juger si ce que je fais vaut le coup d'être suivi.</p>
+    </div>
+    <div class="proof">
+      <a class="pf" href="#"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité &amp; Cyberdéfense&nbsp;: posture attaquant, réseau, post-incident, rétro-ingénierie.</p><span class="arrow">Ma base</span></a>
+      <a class="pf" href="#"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Mon terrain d'entraînement au quotidien&nbsp;: parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf" href="#"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie — web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mes travaux de Master et mes notes de lab. Le code en dit autant que les mots.</p><span class="arrow">github.com/will0fried →</span></a>
+      <a class="pf" href="#"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Une certification pratique, notée sur un vrai rapport de test.</p><span class="arrow">Suivi au journal</span></a>
+      <a class="pf" href="#"><div class="pt"><span class="pn">LinkedIn</span><span class="stt go">Actif</span></div><p>Le fil où je partage mes décryptages et mes avancées. Le plus simple pour me suivre.</p><span class="arrow">Me suivre →</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="apropos">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="lbl">À propos</div><h2>Un profil hybride, assumé.</h2></div></div>
+    <div class="about">
+      <div>
+        <p>Master en cybersécurité et cyberdéfense, et directeur de magasin Orange en parallèle. Ma formation couvre la posture attaquant, le réseau, la détection et la réponse à incident. Privaris, c'est l'endroit où je mets tout ça en pratique et où je le partage, sans filtre.</p>
+        <p>Ma particularité&nbsp;: je fais le pont entre deux mondes. La technique d'un côté, et la capacité à l'expliquer clairement — à un dirigeant comme à un curieux — de l'autre. C'est cette double casquette qui donne le ton de ce que tu liras ici&nbsp;: pointu, mais compréhensible.</p>
+        <div class="sig">W.</div>
+      </div>
+      <div class="facts">
+        <div><span>Formation</span>Master Cybersécurité &amp; Cyberdéfense (2026)</div>
+        <div><span>Métier</span>Directeur de magasin, Orange — en parallèle</div>
+        <div><span>Ce que je fais ici</span>Décrypter la sécurité offensive, en clair</div>
+        <div><span>Domaines</span>Réseau, Wi-Fi, web, cloud, détection</div>
+        <div><span>Base</span>Besançon</div>
+        <div><span>Le mieux pour suivre</span>La newsletter &amp; LinkedIn</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="lbl" style="margin-bottom:16px">Suivre &amp; échanger</div>
+      <h2 style="margin-bottom:14px">Ne rien rater du journal.</h2>
+      <p>Un nouveau décryptage, un lab, un writeup&nbsp;: reçois-les par mail, sans bruit. Et si le sujet te fait réagir ou que tu veux échanger, ma boîte est ouverte.</p>
+      {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
+      {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
+    </div>
+    <div class="cc-card">
+      <span>Newsletter — Le relevé du dimanche</span>
+      <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="nl-form">
+        <input type="hidden" name="_token" value="{{ csrf_token('newsletter') }}">
+        <input type="email" name="email" required placeholder="votre@email.fr" aria-label="Votre e-mail">
+        <button type="submit">S'abonner</button>
+      </form>
+      <span>Écrire</span><a href="mailto:{{ site_email }}">{{ site_email }}</a>
+      <span>LinkedIn</span><a href="#">linkedin.com/company/privaris</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+
+<script type="application/json" id="skills-data">
+{{- skills|map(s => {'s': s.shortLabel})|json_encode|raw -}}
+</script>
+{% endblock %}

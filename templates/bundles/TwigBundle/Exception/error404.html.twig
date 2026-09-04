@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page introuvable — Privaris</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+        :root{color-scheme:dark}
+        *{box-sizing:border-box}
+        body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+             background:#0A0B0D;background-image:radial-gradient(circle at 80% -10%,rgba(246,167,51,.10),transparent 45%);
+             color:#EDEDE7;font-family:"JetBrains Mono",ui-monospace,monospace;text-align:center}
+        .box{max-width:520px;display:flex;flex-direction:column;align-items:center;gap:18px}
+        .code{font-family:"Archivo",Impact,sans-serif;font-weight:900;font-size:96px;line-height:1;letter-spacing:-.03em;color:#F6A733}
+        h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;letter-spacing:-.01em;margin:0}
+        p{color:#969CA6;font-size:14px;line-height:1.6;margin:0;max-width:42ch}
+        .term{width:100%;background:#08090B;border:1px solid #333944;border-radius:7px;text-align:left;font-size:12.5px;line-height:1.7;overflow:hidden;margin-top:6px}
+        .term .bar{display:flex;gap:6px;padding:9px 12px;border-bottom:1px solid #23272F}
+        .term .bar i{width:9px;height:9px;border-radius:50%;display:block}
+        .term .bd{padding:12px 14px}
+        .a{color:#F6A733}.c{color:#35D6C0}.m{color:#61666F}
+        .cta{margin-top:8px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:#0A0B0D;background:#F6A733;
+             padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:500}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="code">404</div>
+        <h1>Cette page n'existe pas.</h1>
+        <div class="term">
+            <div class="bar"><i style="background:#F0524B"></i><i style="background:#F6A733"></i><i style="background:#35D6C0"></i></div>
+            <div class="bd"><span class="a">$</span> curl privaris.fr<span class="m">&lt;la page demandée&gt;</span><br><span class="m">&gt; 404 Not Found</span><br><span class="c"># cette ressource est introuvable — mais tout le reste est là.</span></div>
+        </div>
+        <p>Le lien est peut-être cassé, ou la page a été déplacée.</p>
+        <a class="cta" href="/">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

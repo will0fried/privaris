@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{%- autoescape false -%}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ url('app_home') }}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>{{ url('app_legal_mentions') }}</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>{{ url('app_legal_privacy') }}</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+{% for entry in entries %}  <url><loc>{{ url('app_entry_show', {slug: entry.slug}) }}</loc>{% if entry.publishedAt %}<lastmod>{{ entry.publishedAt|date('Y-m-d') }}</lastmod>{% endif %}<changefreq>monthly</changefreq><priority>0.8</priority></url>
+{% endfor %}</urlset>
+{%- endautoescape -%}

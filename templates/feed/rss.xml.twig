@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{%- autoescape false -%}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Privaris — Carnet de sécurité offensive</title>
+    <link>{{ url('app_home') }}</link>
+    <atom:link href="{{ url('app_rss') }}" rel="self" type="application/rss+xml"/>
+    <description>Sécurité offensive, décryptée en clair.</description>
+    <language>fr</language>
+    <generator>Privaris</generator>
+{% if entries|length and entries|first.publishedAt %}    <lastBuildDate>{{ entries|first.publishedAt|date('r') }}</lastBuildDate>
+{% endif %}
+{% for entry in entries %}    <item>
+      <title><![CDATA[{{ entry.title }}]]></title>
+      <link>{{ url('app_entry_show', {slug: entry.slug}) }}</link>
+      <guid isPermaLink="true">{{ url('app_entry_show', {slug: entry.slug}) }}</guid>
+{% if entry.publishedAt %}      <pubDate>{{ entry.publishedAt|date('r') }}</pubDate>
+{% endif %}      <category><![CDATA[{{ entry.type.label }}]]></category>
+      <description><![CDATA[{{ entry.excerpt }}]]></description>
+    </item>
+{% endfor %}  </channel>
+</rss>
+{%- endautoescape -%}

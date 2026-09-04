@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ entry.title }} — Privaris{% endblock %}
+{% block meta_description %}{{ entry.excerpt }}{% endblock %}
+
+{% block body %}
+<div class="prog" id="prog"></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
+    <a class="back" href="{{ path('app_home') }}#journal">← Journal</a>
+    <a class="nav-cta" href="{{ path('app_home') }}#contact">Me contacter</a>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap col">
+    <div class="crumb"><a href="{{ path('app_home') }}#journal">Journal</a> <span>/</span> <span>{{ entry.reference }}</span> <span class="tagk {{ entry.type.cssClass }}">{{ entry.type.label }}</span></div>
+    <h1>{{ entry.title }}</h1>
+    <p class="dek">{{ entry.excerpt }}</p>
+    <div class="byline">
+      {% if entry.publishedAt %}<span><b>Publié</b> le {{ entry.publishedAt|date('d/m/Y') }}</span>{% endif %}
+      {% if entry.readingMinutes %}<span><b>Lecture</b> ~{{ entry.readingMinutes }} min</span>{% endif %}
+      {% if entry.terrain %}<span><b>Terrain</b> {{ entry.terrain }}</span>{% endif %}
+      <span><b>Auteur</b> W.</span>
+    </div>
+    {% if entry.objectif or entry.duree or entry.outils or entry.prerequis %}
+    <div class="metacard">
+      {% if entry.objectif %}<div><span>Objectif</span><b>{{ entry.objectif|striptags|slice(0, 40)|trim }}{% if entry.objectif|length > 40 %}…{% endif %}</b></div>{% endif %}
+      {% if entry.duree %}<div><span>Durée réelle</span><b>{{ entry.duree }}</b></div>{% endif %}
+      {% if entry.outils %}<div><span>Outils</span><b>{{ entry.outils }}</b></div>{% endif %}
+      {% if entry.prerequis %}<div><span>Prérequis</span><b>{{ entry.prerequis }}</b></div>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<article>
+  <div class="wrap col">
+    {% if entry.videoUrl %}
+    <figure class="videofig">
+      <a class="player" href="{{ entry.videoUrl }}" target="_blank" rel="noopener" aria-label="Regarder la version filmée">
+        <span class="badge">▶ Version filmée</span>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="ov"><div class="ttl">{{ entry.title }}</div><div class="dur">Vidéo</div></div>
+      </a>
+      <figcaption>La version filmée de ce {{ entry.type.label|lower }} — chaque étape à l'écran, commentée.</figcaption>
+    </figure>
+    {% endif %}
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 3 7v5c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-4Z" stroke="#F6A733" stroke-width="1.5"/><path d="M12 8v5" stroke="#F6A733" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1" fill="#F6A733"/></svg><div><b>Cadre</b>Tout test décrit ici a été réalisé sur un réseau m'appartenant ou avec autorisation écrite. Scanner le réseau d'autrui sans accord est une infraction (art. 323-1 du Code pénal).</div></div>
+
+    {% if entry.objectif %}
+    <div class="seclabel"><span class="no">01</span><h2>Objectif</h2></div>
+    {{ entry.objectif|carnet }}
+    {% endif %}
+
+    {% if entry.protocole %}
+    <div class="seclabel"><span class="no">02</span><h2>Protocole</h2></div>
+    {{ entry.protocole|carnet }}
+    {% endif %}
+
+    {% if entry.observations %}
+    <div class="seclabel"><span class="no">03</span><h2>Observations</h2></div>
+    {{ entry.observations|carnet }}
+    {% endif %}
+
+    {% if entry.retiens %}
+    <div class="seclabel"><span class="no">04</span><h2>Ce que j'en retiens</h2></div>
+    <div class="retiens">{{ entry.retiens|carnet }}</div>
+    {% endif %}
+
+    <div class="share">
+      <span>Partager</span>
+      <a class="sh" href="https://www.linkedin.com/sharing/share-offsite/?url={{ url('app_entry_show', {slug: entry.slug})|url_encode }}" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="sh" href="https://twitter.com/intent/tweet?text={{ entry.title|url_encode }}&url={{ url('app_entry_show', {slug: entry.slug})|url_encode }}" target="_blank" rel="noopener">X</a>
+      <a class="sh" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_entry_show', {slug: entry.slug})|url_encode }}" target="_blank" rel="noopener">Facebook</a>
+      <a class="sh" href="mailto:?subject={{ entry.title|url_encode }}&body={{ url('app_entry_show', {slug: entry.slug})|url_encode }}">E-mail</a>
+      <button type="button" class="sh" data-copy="{{ url('app_entry_show', {slug: entry.slug}) }}">Copier le lien</button>
+    </div>
+
+    <div class="author">
+      <div class="av">W</div>
+      <p><b>Will · Privaris</b><br>Sécurité offensive, décryptée en clair. <a href="{{ path('app_home') }}#domaines">Voir les domaines que je couvre →</a></p>
+    </div>
+  </div>
+</article>
+
+<div class="pn">
+  <div class="wrap">
+    {% if prev %}<a href="{{ path('app_entry_show', {slug: prev.slug}) }}"><span>← Entrée précédente</span><div class="t">{{ prev.reference }} · {{ prev.title }}</div></a>{% else %}<span></span>{% endif %}
+    {% if next %}<a href="{{ path('app_entry_show', {slug: next.slug}) }}" class="nx"><span>Entrée suivante →</span><div class="t">{{ next.reference }} · {{ next.title }}</div></a>{% else %}<span></span>{% endif %}
+  </div>
+</div>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

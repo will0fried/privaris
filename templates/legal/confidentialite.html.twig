@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de confidentialité — Privaris{% endblock %}
+{% block meta_description %}Comment Privaris traite vos données personnelles.{% endblock %}
+
+{% block body %}
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
+    <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+  </div>
+</nav>
+
+<main class="legal wrap col">
+  <div class="lbl">Vos données</div>
+  <h1>Politique de confidentialité</h1>
+  <p>Cette page explique quelles données personnelles ce site collecte, pourquoi, et quels sont vos droits. La démarche est volontairement minimale&nbsp;: on ne collecte que le strict nécessaire.</p>
+
+  <h2>Responsable du traitement</h2>
+  <p>L'éditeur du site Privaris (voir les <a href="{{ path('app_legal_mentions') }}">mentions légales</a>). Contact&nbsp;: <a href="mailto:{{ site_email }}">{{ site_email }}</a>.</p>
+
+  <h2>Données collectées</h2>
+  <p>Une seule donnée personnelle est collectée&nbsp;: votre <strong>adresse e-mail</strong>, et uniquement si vous vous inscrivez volontairement à la newsletter. Aucune autre donnée n'est demandée. Le site ne pratique aucun profilage, aucune revente de données.</p>
+
+  <h2>Finalité &amp; base légale</h2>
+  <p>Votre adresse sert exclusivement à vous envoyer la newsletter «&nbsp;Le relevé du dimanche&nbsp;» (nouveaux articles, décryptages). La base légale est votre <strong>consentement</strong> (article 6.1.a du RGPD), recueilli au moment de l'inscription. Vous pouvez le retirer à tout moment.</p>
+
+  <h2>Sous-traitant d'envoi</h2>
+  <p>L'envoi des e-mails est assuré par un prestataire spécialisé agissant comme sous-traitant au sens du RGPD (par exemple <strong>Brevo</strong> — Sendinblue SAS, société établie dans l'Union européenne). Il traite les adresses uniquement pour acheminer les envois, selon nos instructions.</p>
+
+  <h2>Durée de conservation</h2>
+  <p>Votre adresse est conservée tant que vous êtes inscrit. Chaque e-mail contient un lien de <strong>désinscription</strong> qui supprime immédiatement votre adresse de la liste.</p>
+
+  <h2>Vos droits</h2>
+  <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité sur vos données. Pour les exercer, écrivez à <a href="mailto:{{ site_email }}">{{ site_email }}</a>. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+
+  <h2>Cookies</h2>
+  <p>Ce site n'utilise <strong>aucun cookie de suivi, publicitaire ou de mesure d'audience</strong>. Seuls des cookies strictement nécessaires au fonctionnement (session) peuvent être déposés&nbsp;; ils sont exemptés de consentement. Aucun bandeau cookies n'est donc requis.</p>
+
+  <p class="upd">Dernière mise à jour&nbsp;: {{ "now"|date("d/m/Y") }}</p>
+</main>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion — Privaris{% endblock %}
+
+{% block body %}
+<div class="login-wrap">
+  <form method="post" class="login-card">
+    <a class="brand login-brand" href="{{ path('app_home') }}">{{ include('_logo.svg.twig') }} PRIVARIS</a>
+    <div class="login-lbl">Back-office</div>
+
+    {% if error %}
+      <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+      <div class="login-note">Connecté en tant que {{ app.user.userIdentifier }}. <a href="{{ path('admin') }}">Aller à l'admin</a></div>
+    {% endif %}
+
+    <label for="inputEmail">E-mail</label>
+    <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" autocomplete="email" required autofocus>
+
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="_password" id="inputPassword" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <button class="login-btn" type="submit">Se connecter</button>
+    <a class="login-back" href="{{ path('app_home') }}">← Retour au site</a>
+  </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
