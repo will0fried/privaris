@@ -63,7 +63,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .term-bar i{width:10px;height:10px;border-radius:50%;display:block}
 .tb1{background:#F0524B}.tb2{background:#F6A733}.tb3{background:#35D6C0}
 .term-bar span{margin-left:8px;color:var(--dim);font-size:11px;letter-spacing:.06em}
-.term-body{padding:18px 18px 22px;min-height:288px;white-space:pre-wrap;word-break:break-word}
+.term-body{padding:18px 18px 22px;min-height:352px;white-space:pre-wrap;word-break:break-word}
 .term-body .c{color:var(--teal)}.term-body .a{color:var(--amber)}.term-body .m{color:var(--muted)}.term-body .r{color:var(--red)}.term-body .w{color:var(--text)}
 .cursor{display:inline-block;width:8px;height:15px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(2) infinite}
 @keyframes blink{0%,50%{opacity:1}50.1%,100%{opacity:0}}
@@ -289,8 +289,8 @@ footer a:hover{color:var(--amber)}
 
 /* ---------- Animations : révélation au scroll ---------- */
 /* Gated par html.js : sans JS, tout reste visible (pas de contenu caché). */
-html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .7s cubic-bezier(.22,.7,.2,1)}
-html.js .reveal.in{opacity:1;transform:none}
+html.js .reveal{opacity:0;transition:opacity .55s ease}
+html.js .reveal.in{opacity:1}
 /* léger décalage en cascade pour les grilles */
 html.js .proof .pf.reveal{transition-delay:calc(var(--i,0) * 70ms)}
 html.js .matrix .mrow.reveal{transition-delay:calc(var(--i,0) * 45ms)}
