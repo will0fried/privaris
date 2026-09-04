@@ -35,18 +35,18 @@
 
 <section id="domaines">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div><div class="lbl">Domaines</div><h2>Les sujets que je décortique.</h2></div>
       <p>Les grands domaines de la sécurité offensive que je couvre dans le journal — de la reconnaissance d'un réseau jusqu'au cloud. Le radar en donne la carte&nbsp;; les articles, le détail.</p>
     </div>
     <div class="comp">
-      <div class="radar-wrap">
+      <div class="radar-wrap reveal">
         <canvas id="radar" width="520" height="520" aria-label="Radar des domaines couverts en sécurité offensive"></canvas>
         <div class="radar-legend"><span><i style="background:#F6A733"></i>Domaines que je couvre</span></div>
       </div>
       <div class="matrix">
         {% for skill in skills %}
-        <div class="mrow"><div class="mk">{{ skill.name }}</div></div>
+        <div class="mrow reveal" style="--i:{{ loop.index0 }}"><div class="mk">{{ skill.name }}</div></div>
         {% endfor %}
       </div>
     </div>
@@ -55,18 +55,18 @@
 
 <section id="journal">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
       <p>Des labs, des décryptages, des writeups et de la veille — chaque entrée suit le même relevé&nbsp;: l'objectif, la méthode, ce que j'observe, ce que j'en retiens. Du concret, sans jargon inutile. C'est ici que tout se passe.</p>
     </div>
-    <div class="cats" role="group" aria-label="Filtrer le carnet">
+    <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
       <button class="cat on" data-k="all">Tout</button>
       <button class="cat" data-k="lab">Labs</button>
       <button class="cat" data-k="wri">Writeups</button>
       <button class="cat" data-k="dec">Décryptages</button>
       <button class="cat" data-k="cou">Coulisses</button>
     </div>
-    <div class="ledger" id="ledger">
+    <div class="ledger reveal" id="ledger">
       <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
       {% for entry in entries %}
       <div class="row" data-k="{{ entry.type.cssClass }}">
@@ -87,25 +87,25 @@
 
 <section id="preuves">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div><div class="lbl">Preuves</div><h2>De quoi se faire une idée.</h2></div>
       <p>Rien à croire sur parole&nbsp;: mon profil, mes travaux et ma pratique sont publics et vérifiables d'un clic. C'est la meilleure façon de juger si ce que je fais vaut le coup d'être suivi.</p>
     </div>
     <div class="proof">
-      <a class="pf" href="#"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité &amp; Cyberdéfense&nbsp;: posture attaquant, réseau, post-incident, rétro-ingénierie.</p><span class="arrow">Ma base</span></a>
-      <a class="pf" href="#"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Mon terrain d'entraînement au quotidien&nbsp;: parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf" href="#"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie — web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mes travaux de Master et mes notes de lab. Le code en dit autant que les mots.</p><span class="arrow">github.com/will0fried →</span></a>
-      <a class="pf" href="#"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Une certification pratique, notée sur un vrai rapport de test.</p><span class="arrow">Suivi au journal</span></a>
-      <a class="pf" href="#"><div class="pt"><span class="pn">LinkedIn</span><span class="stt go">Actif</span></div><p>Le fil où je partage mes décryptages et mes avancées. Le plus simple pour me suivre.</p><span class="arrow">Me suivre →</span></a>
+      <a class="pf reveal" href="#"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité &amp; Cyberdéfense&nbsp;: posture attaquant, réseau, post-incident, rétro-ingénierie.</p><span class="arrow">Ma base</span></a>
+      <a class="pf reveal" href="#"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Mon terrain d'entraînement au quotidien&nbsp;: parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf reveal" href="#"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie — web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf reveal" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mes travaux de Master et mes notes de lab. Le code en dit autant que les mots.</p><span class="arrow">github.com/will0fried →</span></a>
+      <a class="pf reveal" href="#"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Une certification pratique, notée sur un vrai rapport de test.</p><span class="arrow">Suivi au journal</span></a>
+      <a class="pf reveal" href="#"><div class="pt"><span class="pn">LinkedIn</span><span class="stt go">Actif</span></div><p>Le fil où je partage mes décryptages et mes avancées. Le plus simple pour me suivre.</p><span class="arrow">Me suivre →</span></a>
     </div>
   </div>
 </section>
 
 <section id="apropos">
   <div class="wrap">
-    <div class="sec-head"><div><div class="lbl">À propos</div><h2>Un profil hybride, assumé.</h2></div></div>
-    <div class="about">
+    <div class="sec-head reveal"><div><div class="lbl">À propos</div><h2>Un profil hybride, assumé.</h2></div></div>
+    <div class="about reveal">
       <div>
         <p>Master en cybersécurité et cyberdéfense, et directeur de magasin Orange en parallèle. Ma formation couvre la posture attaquant, le réseau, la détection et la réponse à incident. Privaris, c'est l'endroit où je mets tout ça en pratique et où je le partage, sans filtre.</p>
         <p>Ma particularité&nbsp;: je fais le pont entre deux mondes. La technique d'un côté, et la capacité à l'expliquer clairement — à un dirigeant comme à un curieux — de l'autre. C'est cette double casquette qui donne le ton de ce que tu liras ici&nbsp;: pointu, mais compréhensible.</p>
@@ -132,7 +132,7 @@
       {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
       {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
     </div>
-    <div class="cc-card">
+    <div class="cc-card reveal">
       <span>Newsletter — Le relevé du dimanche</span>
       <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="nl-form">
         <input type="hidden" name="_token" value="{{ csrf_token('newsletter') }}">

@@ -20,6 +20,8 @@
     <meta name="twitter:description" content="{{ block('meta_description') }}">
     <meta name="twitter:image" content="{{ absolute_url('/og.png') }}">
 
+    <script>document.documentElement.className += ' js';</script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -29,6 +31,9 @@
 </head>
 <body>
 {% block body %}{% endblock %}
+<button type="button" id="toTop" class="to-top" aria-label="Remonter en haut" title="Remonter en haut">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
