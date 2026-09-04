@@ -8,6 +8,11 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Canonique : forcer HTTPS + retirer le www -> https://privaris.fr
+    RewriteCond %{HTTPS} !=on [OR]
+    RewriteCond %{HTTP_HOST} ^www\. [NC]
+    RewriteRule ^ https://privaris.fr%{REQUEST_URI} [R=301,L]
+
     RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
     RewriteRule .* - [E=BASE:%1]
 
