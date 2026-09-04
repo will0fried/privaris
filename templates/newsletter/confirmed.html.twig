@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>{% if state == 'ok' %}Inscription confirmée{% else %}Lien invalide{% endif %} — Privaris</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+        :root{color-scheme:dark}
+        *{box-sizing:border-box}
+        body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+             background:#0A0B0D;background-image:radial-gradient(circle at 80% -10%,rgba(246,167,51,.10),transparent 45%);
+             color:#EDEDE7;font-family:"JetBrains Mono",ui-monospace,monospace;text-align:center}
+        .box{max-width:540px;display:flex;flex-direction:column;align-items:center;gap:18px}
+        .mark{font-family:"Archivo",Impact,sans-serif;font-weight:900;font-size:15px;letter-spacing:.06em;color:#F6A733}
+        .icon{width:60px;height:60px}
+        h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 0}
+        p{color:#969CA6;font-size:14px;line-height:1.65;margin:0;max-width:44ch}
+        .cta{margin-top:10px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:#0A0B0D;background:#F6A733;
+             padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:500}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="mark">PRIVARIS</div>
+        {% if state == 'ok' %}
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#35D6C0" stroke-width="1.5"/><path d="m8 12.5 2.5 2.5L16 9" stroke="#35D6C0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h1>C'est confirmé.</h1>
+            <p>Votre inscription au <b style="color:#EDEDE7">Relevé du dimanche</b> est validée. Rien à faire de plus — le prochain relevé arrivera dans votre boîte. À dimanche.</p>
+        {% else %}
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#F0524B" stroke-width="1.5"/><path d="M12 7v6" stroke="#F0524B" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="#F0524B"/></svg>
+            <h1>Ce lien n'est plus valide.</h1>
+            <p>Le lien de confirmation a peut-être expiré ou a déjà été utilisé. Vous pouvez relancer une inscription depuis la page d'accueil.</p>
+        {% endif %}
+        <a class="cta" href="{{ path('app_home') }}">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

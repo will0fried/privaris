@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Désinscription — Privaris</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+        :root{color-scheme:dark}
+        *{box-sizing:border-box}
+        body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+             background:#0A0B0D;color:#EDEDE7;font-family:"JetBrains Mono",ui-monospace,monospace;text-align:center}
+        .box{max-width:540px;display:flex;flex-direction:column;align-items:center;gap:18px}
+        .mark{font-family:"Archivo",Impact,sans-serif;font-weight:900;font-size:15px;letter-spacing:.06em;color:#F6A733}
+        .icon{width:56px;height:56px}
+        h1{font-family:"Archivo",sans-serif;font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:-.01em;margin:4px 0 0}
+        p{color:#969CA6;font-size:14px;line-height:1.65;margin:0;max-width:44ch}
+        .cta{margin-top:10px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:#EDEDE7;background:transparent;border:1px solid #333944;
+             padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:500}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="mark">PRIVARIS</div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#61666F" stroke-width="1.5"/><path d="M8 12h8" stroke="#61666F" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <h1>Vous êtes désinscrit.</h1>
+        <p>Votre adresse a été retirée de la liste, sans rancune. Vous ne recevrez plus « Le relevé du dimanche ». Si vous changez d'avis, l'inscription reste ouverte sur le site.</p>
+        <a class="cta" href="{{ path('app_home') }}">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

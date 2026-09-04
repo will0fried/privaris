@@ -36,7 +36,8 @@ class SubscriberCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield EmailField::new('email', 'E-mail');
-        yield BooleanField::new('confirmed', 'Confirmé');
+        yield BooleanField::new('confirmed', 'Confirmé')->renderAsSwitch(false);
         yield DateTimeField::new('subscribedAt', 'Inscrit le')->hideOnForm();
+        yield DateTimeField::new('confirmedAt', 'Confirmé le')->hideOnForm();
     }
 }

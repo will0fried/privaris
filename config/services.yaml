@@ -17,3 +17,13 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    # Client Brevo (newsletter). Les valeurs viennent de l'environnement
+    # (défauts dans .env, vraie clé API dans .env.local sur le serveur).
+    # Clé vide = envoi désactivé proprement, le site continue de tourner.
+    App\Service\BrevoClient:
+        arguments:
+            $apiKey: '%env(BREVO_API_KEY)%'
+            $listId: '%env(BREVO_LIST_ID)%'
+            $senderEmail: '%env(BREVO_SENDER_EMAIL)%'
+            $senderName: '%env(BREVO_SENDER_NAME)%'

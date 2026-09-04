@@ -21,6 +21,24 @@ class SubscriberRepository extends ServiceEntityRepository
         return null !== $this->findOneBy(['email' => strtolower(trim($email))]);
     }
 
+    public function findOneByEmail(string $email): ?Subscriber
+    {
+        return $this->findOneBy(['email' => strtolower(trim($email))]);
+    }
+
+    public function findOneByToken(string $token): ?Subscriber
+    {
+        return $this->findOneBy(['token' => $token]);
+    }
+
+    public function remove(Subscriber $subscriber, bool $flush = true): void
+    {
+        $this->getEntityManager()->remove($subscriber);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     public function save(Subscriber $subscriber, bool $flush = true): void
     {
         $this->getEntityManager()->persist($subscriber);
