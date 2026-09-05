@@ -28,6 +28,14 @@ class NewsletterController extends AbstractController
             return $this->redirectToRoute('app_home', ['_fragment' => 'contact']);
         }
 
+        // Piège à bots : ce champ est masqué, un humain ne le remplit jamais.
+        // S'il est rempli, on renvoie une réponse d'apparence normale sans rien enregistrer ni envoyer.
+        if ('' !== trim((string) $request->request->get('website'))) {
+            $this->addFlash('newsletter_success', 'Presque ! Ouvrez le lien de confirmation qu\'on vient de vous envoyer par e-mail.');
+
+            return $this->redirectToRoute('app_home', ['_fragment' => 'contact']);
+        }
+
         $email = strtolower(trim((string) $request->request->get('email')));
 
         $candidate = (new Subscriber())->setEmail($email);

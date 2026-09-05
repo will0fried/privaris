@@ -140,6 +140,10 @@
       <span>Newsletter — Le relevé du dimanche</span>
       <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="nl-form">
         <input type="hidden" name="_token" value="{{ csrf_token('newsletter') }}">
+        {# Piège à bots : invisible pour un humain, rempli seulement par les robots #}
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+          <label>Laissez ce champ vide<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
         <input type="email" name="email" required placeholder="votre@email.fr" aria-label="Votre e-mail">
         <button type="submit">S'abonner</button>
       </form>
