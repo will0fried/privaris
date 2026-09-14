@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Privaris — Sécurité offensive{% endblock %}
+{% block title %}Privaris · Sécurité offensive et agents de défense{% endblock %}
 
 {% block body %}
 <nav>
@@ -22,9 +22,9 @@
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-l">
-      <div class="h-tag"><span>SÉCURITÉ OFFENSIVE</span><span>·</span><span>BESANÇON</span><span>·</span><span><b>● CARNET PUBLIC</b></span></div>
-      <h1>Repérer les failles <em>avant</em> ceux qui en profitent.</h1>
-      <p class="lead">Master en cybersécurité, je décortique la sécurité offensive&nbsp;: comment un attaquant entre dans un réseau, ce qu'il y trouve, et comment s'en protéger. Je publie tout ici, expliqué clairement — pour celles et ceux que le sujet passionne autant que moi.</p>
+      <div class="h-tag"><span>SÉCURITÉ OFFENSIVE</span><span>·</span><span>AGENTS &amp; IA</span><span>·</span><span><b>● CARNET PUBLIC</b></span></div>
+      <h1>La sécurité offensive, <em>en public</em>.</h1>
+      <p class="lead">Master en cybersécurité, je fais du pentest et je m'intéresse à une question précise&nbsp;: ce qui se passe quand on confie la défense à des agents autonomes et à des LLM. Où ça tient, où ça lâche. Je note tout ici au fur et à mesure&nbsp;: mes labs, mes tests, mes erreurs aussi.</p>
       <div class="ctas">
         <a class="btn" href="#journal">Lire le journal</a>
         <a class="btn ghost" href="#contact">S'abonner</a>
@@ -40,8 +40,8 @@
 <section id="domaines">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div><div class="lbl">Domaines</div><h2>Les sujets que je décortique.</h2></div>
-      <p>Les grands domaines de la sécurité offensive que je couvre dans le journal — de la reconnaissance d'un réseau jusqu'au cloud. Le radar en donne la carte&nbsp;; les articles, le détail.</p>
+      <div><div class="lbl">Domaines</div><h2>Ce sur quoi je travaille.</h2></div>
+      <p>Les domaines que je couvre dans le journal, de la reconnaissance réseau au cloud, plus tout ce qui touche aux agents de défense et à l'IA en sécurité. Le radar donne la carte, les articles donnent le détail.</p>
     </div>
     <div class="comp">
       <div class="radar-wrap reveal">
@@ -61,7 +61,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
-      <p>Des labs, des décryptages, des writeups et de la veille — chaque entrée suit le même relevé&nbsp;: l'objectif, la méthode, ce que j'observe, ce que j'en retiens. Du concret, sans jargon inutile. C'est ici que tout se passe.</p>
+      <p>Des labs, des writeups, des décryptages. À chaque fois je note la même chose&nbsp;: ce que je cherchais, comment j'ai fait, ce que j'ai vu, ce que j'en retiens. Ce qui a marché comme ce qui a raté.</p>
     </div>
     <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
       <button class="cat on" data-k="all">Tout</button>
@@ -83,7 +83,7 @@
         <span class="s{% if not entry.published %} live{% endif %}">{{ entry.statusLabel }}</span>
       </div>
       {% else %}
-      <div class="row"><span class="t">Le premier article arrive très bientôt.</span></div>
+      <div class="row"><span class="t">Le premier article arrive bientôt.</span></div>
       {% endfor %}
     </div>
   </div>
@@ -92,33 +92,33 @@
 <section id="preuves">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div><div class="lbl">Preuves</div><h2>De quoi se faire une idée.</h2></div>
-      <p>Rien à croire sur parole&nbsp;: mon profil, mes travaux et ma pratique sont publics et vérifiables d'un clic. C'est la meilleure façon de juger si ce que je fais vaut le coup d'être suivi.</p>
+      <div><div class="lbl">Preuves</div><h2>De quoi te faire une idée.</h2></div>
+      <p>Pas besoin de me croire sur parole. Mon profil, mes travaux et mon code sont publics, tu peux vérifier par toi-même.</p>
     </div>
     <div class="proof">
-      <a class="pf reveal" href="https://github.com/will0fried/uscb06-agents-cyberdefense" target="_blank" rel="noopener"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité &amp; Cyberdéfense&nbsp;: posture attaquant, réseau, post-incident, rétro-ingénierie.</p><span class="arrow">Ma base</span></a>
-      <a class="pf reveal" href="https://tryhackme.com/p/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Mon terrain d'entraînement au quotidien&nbsp;: parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf reveal" href="https://www.root-me.org/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie — web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf reveal" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mes travaux de Master et mes notes de lab. Le code en dit autant que les mots.</p><span class="arrow">github.com/will0fried →</span></a>
-      <div class="pf reveal"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Une certification pratique, notée sur un vrai rapport de test.</p><span class="arrow">Suivi au journal</span></div>
+      <a class="pf reveal" href="https://github.com/will0fried/uscb06-agents-cyberdefense" target="_blank" rel="noopener"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité et cyberdéfense. Mon mémoire porte sur les agents autonomes de défense, c'est de là que vient mon angle sur l'IA.</p><span class="arrow">Voir le repo →</span></a>
+      <a class="pf reveal" href="https://tryhackme.com/p/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Là où je m'entraîne. Parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf reveal" href="https://www.root-me.org/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie&nbsp;: web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
+      <a class="pf reveal" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mon mémoire et mes notes de lab. Tout est là, en clair.</p><span class="arrow">github.com/will0fried →</span></a>
+      <div class="pf reveal"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Des certifs pratiques, notées sur un vrai rapport de test. J'y travaille en ce moment.</p><span class="arrow">Suivi au journal</span></div>
     </div>
   </div>
 </section>
 
 <section id="apropos">
   <div class="wrap">
-    <div class="sec-head reveal"><div><div class="lbl">À propos</div><h2>Un profil hybride, assumé.</h2></div></div>
+    <div class="sec-head reveal"><div><div class="lbl">À propos</div><h2>Qui je suis.</h2></div></div>
     <div class="about reveal">
       <div>
-        <p>Master en cybersécurité et cyberdéfense, et directeur de magasin Orange en parallèle. Ma formation couvre la posture attaquant, le réseau, la détection et la réponse à incident. Privaris, c'est l'endroit où je mets tout ça en pratique et où je le partage, sans filtre.</p>
-        <p>Ma particularité&nbsp;: je fais le pont entre deux mondes. La technique d'un côté, et la capacité à l'expliquer clairement — à un dirigeant comme à un curieux — de l'autre. C'est cette double casquette qui donne le ton de ce que tu liras ici&nbsp;: pointu, mais compréhensible.</p>
+        <p>Je suis en reconversion vers la sécurité offensive. J'ai un master en cybersécurité et cyberdéfense, et en parallèle je dirige un magasin Orange. Mon mémoire portait sur les agents autonomes de cyberdéfense&nbsp;: comment une IA peut repérer une attaque et y répondre seule, et surtout où elle se plante. Privaris, c'est là que je continue ce travail en public.</p>
+        <p>Ce qui m'intéresse, c'est le croisement entre le pentest et l'automatisation. Beaucoup de gens testent des systèmes. Moi j'essaie aussi de comprendre pourquoi les outils censés défendre, agents et LLM compris, laissent passer des choses qu'un humain aurait vues. C'est ce fil que tu retrouves dans le journal.</p>
         <div class="sig">W.</div>
       </div>
       <div class="facts">
         <div><span>Formation</span>Master Cybersécurité &amp; Cyberdéfense (2026)</div>
-        <div><span>Métier</span>Directeur de magasin, Orange — en parallèle</div>
-        <div><span>Ce que je fais ici</span>Décrypter la sécurité offensive, en clair</div>
-        <div><span>Domaines</span>Réseau, Wi-Fi, web, cloud, détection</div>
+        <div><span>Métier</span>Directeur de magasin Orange, en parallèle</div>
+        <div><span>Ce que je fais ici</span>Sécurité offensive et limites de l'IA en défense</div>
+        <div><span>Domaines</span>Réseau, web, cloud, détection, agents &amp; IA</div>
         <div><span>Base</span>Besançon</div>
         <div><span>Le mieux pour suivre</span>La newsletter</div>
       </div>
@@ -131,7 +131,7 @@
     <div>
       <div class="lbl" style="margin-bottom:16px">Suivre &amp; échanger</div>
       <h2 style="margin-bottom:14px">Ne rien rater du journal.</h2>
-      <p>Un nouveau décryptage, un lab, un writeup&nbsp;: reçois-les par mail, sans bruit. Et si le sujet te fait réagir ou que tu veux échanger, ma boîte est ouverte.</p>
+      <p>Nouveau lab, writeup ou article&nbsp;: tu le reçois par mail, sans spam. Et si tu veux réagir ou en discuter, écris-moi, je réponds.</p>
       {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
       {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
     </div>

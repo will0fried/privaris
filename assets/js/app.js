@@ -143,13 +143,13 @@
   if (term) {
     var lines = [
       { c: 'm', t: '$ ' }, { c: 'w', t: 'whoami', br: 1 },
-      { c: 'a', t: '> Will — sécurité offensive · Master Cyber & Cyberdéfense 2026', br: 1 },
-      { c: 'a', t: "> je teste, je documente, j'explique", br: 2 },
+      { c: 'a', t: '> Will, sécurité offensive · Master cyber & cyberdéfense 2026', br: 1 },
+      { c: 'a', t: "> je teste des systèmes et je note ce que je trouve", br: 2 },
       { c: 'm', t: '$ ' }, { c: 'w', t: 'cat approche.txt', br: 1 },
-      { c: 'c', t: '> repérer les failles avant qu\'on en profite,', br: 1 },
-      { c: 'c', t: '  et les rendre compréhensibles par tous', br: 2 },
+      { c: 'c', t: '> comprendre comment on entre dans un réseau,', br: 1 },
+      { c: 'c', t: '  et où l\'IA se plante quand elle doit défendre', br: 2 },
       { c: 'm', t: '$ ' }, { c: 'w', t: './etat', br: 1 },
-      { c: 'w', t: '> domaine ...... ', cont: 1 }, { c: 'a', t: 'réseaux, wi-fi, web', br: 1 },
+      { c: 'w', t: '> domaine ...... ', cont: 1 }, { c: 'a', t: 'réseau, web, cloud, agents IA', br: 1 },
       { c: 'w', t: '> méthode ...... ', cont: 1 }, { c: 'a', t: "du premier scan jusqu'au rapport", br: 1 },
       { c: 'w', t: '> règle ........ ', cont: 1 }, { c: 'r', t: 'aucun test sans accord écrit', br: 2 },
       { c: 'm', t: '$ ', cursor: 1 }
