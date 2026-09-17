@@ -36,6 +36,19 @@ enum EntryType: string
     }
 
     /**
+     * Vrai pour les types dont le corps est structuré en 4 champs
+     * (Objectif → Protocole → Observations → Ce que j'en retiens).
+     * Faux pour les types en contenu libre (Décryptage, Coulisses).
+     */
+    public function hasStructuredBody(): bool
+    {
+        return match ($this) {
+            self::LAB, self::WRITEUP => true,
+            self::DECRYPTAGE, self::COULISSES => false,
+        };
+    }
+
+    /**
      * @return array<string, string> label => value, pour les formulaires
      */
     public static function choices(): array

@@ -24,7 +24,7 @@
       {% if entry.terrain %}<span><b>Terrain</b> {{ entry.terrain }}</span>{% endif %}
       <span><b>Auteur</b> W.</span>
     </div>
-    {% if entry.objectif or entry.duree or entry.outils or entry.prerequis %}
+    {% if entry.type.hasStructuredBody and (entry.objectif or entry.duree or entry.outils or entry.prerequis) %}
     <div class="metacard reveal">
       {% if entry.objectif %}<div><span>Objectif</span><b>{{ entry.objectif|striptags|slice(0, 40)|trim }}{% if entry.objectif|length > 40 %}…{% endif %}</b></div>{% endif %}
       {% if entry.duree %}<div><span>Durée réelle</span><b>{{ entry.duree }}</b></div>{% endif %}
@@ -48,6 +48,7 @@
     </figure>
     {% endif %}
 
+    {% if entry.type.hasStructuredBody %}
     <div class="note reveal"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 3 7v5c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-4Z" stroke="#F6A733" stroke-width="1.5"/><path d="M12 8v5" stroke="#F6A733" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1" fill="#F6A733"/></svg><div><b>Cadre</b>Tout test décrit ici a été réalisé sur un réseau m'appartenant ou avec autorisation écrite. Scanner le réseau d'autrui sans accord est une infraction (art. 323-1 du Code pénal).</div></div>
 
     {% if entry.objectif %}
@@ -68,6 +69,9 @@
     {% if entry.retiens %}
     <div class="seclabel reveal"><span class="no">04</span><h2>Ce que j'en retiens</h2></div>
     <div class="retiens">{{ entry.retiens|carnet }}</div>
+    {% endif %}
+    {% else %}
+    {{ entry.content|carnet }}
     {% endif %}
 
     <div class="share reveal">

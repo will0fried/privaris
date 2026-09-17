@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Entry;
 use App\Enum\EntryStatus;
 use App\Enum\EntryType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -31,6 +32,32 @@ class EntryCrudController extends AbstractCrudController
             ->setDefaultSort(['reference' => 'DESC'])
             ->setSearchFields(['reference', 'title', 'excerpt'])
             ->setPaginatorPageSize(30);
+    }
+
+    public function configureAssets(Assets $assets): Assets
+    {
+        // N'affiche que le bloc de contenu correspondant au Type choisi.
+        $js = <<<'HTML'
+<script>
+(function () {
+    function apply() {
+        var sel = document.querySelector('select[name$="[type]"]');
+        if (!sel) { return; }
+        var structured = (sel.value === 'lab' || sel.value === 'writeup');
+        document.querySelectorAll('.js-body-structured').forEach(function (el) { el.style.display = structured ? '' : 'none'; });
+        document.querySelectorAll('.js-body-free').forEach(function (el) { el.style.display = structured ? 'none' : ''; });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        var sel = document.querySelector('select[name$="[type]"]');
+        if (!sel) { return; }
+        sel.addEventListener('change', apply);
+        apply();
+    });
+})();
+</script>
+HTML;
+
+        return $assets->addHtmlContentToBody($js);
     }
 
     public function configureFields(string $pageName): iterable
@@ -71,13 +98,20 @@ class EntryCrudController extends AbstractCrudController
             ->setNumOfRows(3)
             ->hideOnIndex();
 
-        yield FormField::addFieldset('Contenu du carnet')
+        yield FormField::addFieldset('Contenu structuré · Labs & Writeups')
             ->setHelp('Objectif → Protocole → Observations → Ce que j\'en retiens. Markdown léger accepté.')
+            ->setCssClass('js-body-structured')
             ->collapsible();
         yield TextareaField::new('objectif', 'Objectif')->setNumOfRows(4)->hideOnIndex();
         yield TextareaField::new('protocole', 'Protocole')->setNumOfRows(8)->hideOnIndex();
         yield TextareaField::new('observations', 'Observations')->setNumOfRows(6)->hideOnIndex();
         yield TextareaField::new('retiens', 'Ce que j\'en retiens')->setNumOfRows(5)->hideOnIndex();
+
+        yield FormField::addFieldset('Contenu libre · Décryptage & Coulisses')
+            ->setHelp('Un seul champ, en Markdown (gras, listes, `code`, blocs ```). Remplace les 4 champs ci-dessus pour les articles.')
+            ->setCssClass('js-body-free')
+            ->collapsible();
+        yield TextareaField::new('content', 'Contenu (Markdown)')->setNumOfRows(18)->hideOnIndex();
 
         yield FormField::addColumn('col-lg-4');
 
