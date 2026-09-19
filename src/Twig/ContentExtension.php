@@ -40,7 +40,7 @@ class ContentExtension extends AbstractExtension
             } elseif (1 === $i % 3) {
                 $lang = $parts[$i];
                 $code = $parts[$i + 1] ?? '';
-                $html .= $this->renderCode($code, $lang);
+                $html .= 'scores' === $lang ? $this->renderScores($code) : $this->renderCode($code, $lang);
                 ++$i; // on a consommé le groupe "code"
             }
         }
@@ -65,6 +65,51 @@ class ContentExtension extends AbstractExtension
         $label = $lang ? htmlspecialchars($lang, \ENT_QUOTES, 'UTF-8') : 'terminal';
 
         return '<figure class="codeblk"><div class="cap"><span>'.$label.'</span></div><pre>'.rtrim($out, "\n").'</pre></figure>';
+    }
+
+    /**
+     * Bloc ```scores : lignes « Libellé : valeur » rendues en tableau,
+     * pire valeur en rouge, meilleure en vert.
+     */
+    private function renderScores(string $code): string
+    {
+        $rows = [];
+        foreach (explode("\n", trim($code)) as $line) {
+            $line = trim($line);
+            if ('' === $line) {
+                continue;
+            }
+            $pos = strrpos($line, ':');
+            if (false === $pos) {
+                $rows[] = ['label' => $line, 'value' => '', 'num' => null];
+                continue;
+            }
+            $value = trim(substr($line, $pos + 1));
+            $clean = str_replace([' ', ','], ['', '.'], $value);
+            $rows[] = [
+                'label' => trim(substr($line, 0, $pos)),
+                'value' => $value,
+                'num' => is_numeric($clean) ? (float) $clean : null,
+            ];
+        }
+
+        $nums = array_filter(array_column($rows, 'num'), static fn ($n): bool => null !== $n);
+        $min = [] !== $nums ? min($nums) : null;
+        $max = [] !== $nums ? max($nums) : null;
+
+        $out = '<div class="scoreboard">';
+        foreach ($rows as $r) {
+            $cls = '';
+            if (null !== $r['num'] && $r['num'] === $min) {
+                $cls = ' bad';
+            } elseif (null !== $r['num'] && $r['num'] === $max) {
+                $cls = ' good';
+            }
+            $out .= '<div class="srow"><span class="slabel">'.$this->inline($r['label']).'</span>'
+                .'<span class="sval'.$cls.'">'.htmlspecialchars($r['value'], \ENT_QUOTES, 'UTF-8').'</span></div>';
+        }
+
+        return $out.'</div>';
     }
 
     private function renderProse(string $text): string
