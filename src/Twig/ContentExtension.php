@@ -137,6 +137,13 @@ class ContentExtension extends AbstractExtension
         $text = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $text);
         // `code en ligne`
         $text = preg_replace('/`([^`]+)`/', '<code class="inl">$1</code>', $text);
+        // [texte](https://lien)
+        $text = preg_replace(
+            '/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/',
+            '<a href="$2" target="_blank" rel="noopener">$1</a>',
+            $text
+        );
+
         // sauts de ligne simples
         return nl2br($text, false);
     }
