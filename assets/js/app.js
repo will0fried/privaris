@@ -6,13 +6,28 @@
 
   /* ---------- Filtre du journal ---------- */
   var cats = document.querySelectorAll('.cat');
+  var ledger = document.getElementById('ledger');
   var rows = document.querySelectorAll('#ledger .row[data-k]');
+  var emptyMsg = null;
+  if (ledger && rows.length) {
+    emptyMsg = document.createElement('div');
+    emptyMsg.className = 'ledger-empty';
+    emptyMsg.hidden = true;
+    emptyMsg.textContent = "Aucune entrée dans cette catégorie pour l'instant.";
+    ledger.appendChild(emptyMsg);
+  }
   cats.forEach(function (c) {
     c.addEventListener('click', function () {
       cats.forEach(function (x) { x.classList.remove('on'); });
       c.classList.add('on');
       var k = c.dataset.k;
-      rows.forEach(function (r) { r.hidden = (k !== 'all' && r.dataset.k !== k); });
+      var visible = 0;
+      rows.forEach(function (r) {
+        var hide = (k !== 'all' && r.dataset.k !== k);
+        r.hidden = hide;
+        if (!hide) { visible++; }
+      });
+      if (emptyMsg) { emptyMsg.hidden = (visible !== 0); }
     });
   });
 

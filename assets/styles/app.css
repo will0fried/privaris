@@ -77,7 +77,8 @@ nav.open .nav-burger .ic-x{display:block}
 .term-bar i{width:10px;height:10px;border-radius:50%;display:block}
 .tb1{background:#F0524B}.tb2{background:#F6A733}.tb3{background:#35D6C0}
 .term-bar span{margin-left:8px;color:var(--dim);font-size:11px;letter-spacing:.06em}
-.term-body{padding:18px 18px 22px;min-height:352px;white-space:pre-wrap;word-break:break-word}
+.term-body{padding:18px 18px 22px;height:352px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.term-body::-webkit-scrollbar{width:8px}.term-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
 .term-body .c{color:var(--teal)}.term-body .a{color:var(--amber)}.term-body .m{color:var(--muted)}.term-body .r{color:var(--red)}.term-body .w{color:var(--text)}
 .cursor{display:inline-block;width:8px;height:15px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(2) infinite}
 @keyframes blink{0%,50%{opacity:1}50.1%,100%{opacity:0}}
@@ -126,10 +127,11 @@ nav.open .nav-burger .ic-x{display:block}
 .ledger .row .t{color:var(--text)}
 .ledger .row .t a{color:var(--text)}
 .ledger .row .t a:hover{color:var(--amber)}
-.ledger .row .t small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.ledger .row .t small{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted);font-size:13px;margin-top:2px}
 .ledger .row .s{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right}
 .ledger .row .s.live{color:var(--amber)}
 .ledger .row[hidden]{display:none}
+.ledger-empty{padding:22px 18px;color:var(--dim);font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;border-top:1px solid var(--line);background:var(--panel)}
 @media (max-width:720px){.ledger .row{grid-template-columns:1fr;gap:4px}.ledger .row:first-child{display:none}.ledger .row .s{text-align:left}}
 
 /* proof */
