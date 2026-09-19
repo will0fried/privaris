@@ -132,6 +132,7 @@ nav.open .nav-burger .ic-x{display:block}
 .ledger .row .s.live{color:var(--amber)}
 .ledger .row[hidden]{display:none}
 .ledger-empty{padding:22px 18px;color:var(--dim);font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;border-top:1px solid var(--line);background:var(--panel)}
+.ledger-more{margin-top:22px;text-align:center}
 @media (max-width:720px){.ledger .row{grid-template-columns:1fr;gap:4px}.ledger .row:first-child{display:none}.ledger .row .s{text-align:left}}
 
 /* proof */

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le carnet — Privaris{% endblock %}
+{% block meta_description %}Tous les labs, writeups, décryptages et coulisses du carnet Privaris.{% endblock %}
+
+{% block body %}
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
+    <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+  </div>
+</nav>
+
+<section id="journal">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
+      <p>Tout ce que je publie ici&nbsp;: labs, writeups, décryptages, coulisses. Filtre par type, ou parcours tout dans l'ordre.</p>
+    </div>
+    <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
+      <button class="cat on" data-k="all">Tout</button>
+      <button class="cat" data-k="lab">Labs</button>
+      <button class="cat" data-k="wri">Writeups</button>
+      <button class="cat" data-k="dec">Décryptages</button>
+      <button class="cat" data-k="cou">Coulisses</button>
+    </div>
+    <div class="ledger reveal" id="ledger">
+      <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
+      {% for entry in entries %}
+      <div class="row" data-k="{{ entry.type.cssClass }}">
+        <span class="id">{{ entry.reference }}</span>
+        <span class="k {{ entry.type.cssClass }}">{{ entry.type.label }}</span>
+        <span class="t">
+          {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+          <small>{{ entry.excerpt }}</small>
+        </span>
+        <span class="s{% if not entry.published %} live{% endif %}">{{ entry.statusLabel }}</span>
+      </div>
+      {% else %}
+      <div class="row"><span class="t">Le premier article arrive bientôt.</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+{% endblock %}

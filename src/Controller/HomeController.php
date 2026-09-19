@@ -15,7 +15,8 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'skills' => $skills->findAllOrdered(),
-            'entries' => $entries->findForJournal(),
+            'entries' => $entries->findForJournal(6),
+            'total' => $entries->countForJournal(),
         ]);
     }
 }

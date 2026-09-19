@@ -65,13 +65,6 @@
       <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
       <p>Des labs, des writeups, des décryptages. À chaque fois je note la même chose&nbsp;: ce que je cherchais, comment j'ai fait, ce que j'ai vu, ce que j'en retiens. Ce qui a marché comme ce qui a raté.</p>
     </div>
-    <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
-      <button class="cat on" data-k="all">Tout</button>
-      <button class="cat" data-k="lab">Labs</button>
-      <button class="cat" data-k="wri">Writeups</button>
-      <button class="cat" data-k="dec">Décryptages</button>
-      <button class="cat" data-k="cou">Coulisses</button>
-    </div>
     <div class="ledger reveal" id="ledger">
       <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
       {% for entry in entries %}
@@ -88,6 +81,9 @@
       <div class="row"><span class="t">Le premier article arrive bientôt.</span></div>
       {% endfor %}
     </div>
+    {% if total > 6 %}
+    <div class="ledger-more reveal"><a class="btn ghost" href="{{ path('app_entry_index') }}">Voir tout le carnet →</a></div>
+    {% endif %}
   </div>
 </section>
 

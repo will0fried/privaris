@@ -10,6 +10,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EntryController extends AbstractController
 {
+    #[Route('/carnet', name: 'app_entry_index', methods: ['GET'])]
+    public function index(EntryRepository $entries): Response
+    {
+        return $this->render('entry/index.html.twig', [
+            'entries' => $entries->findAllForJournal(),
+        ]);
+    }
+
     #[Route('/carnet/{slug}', name: 'app_entry_show', methods: ['GET'])]
     public function show(string $slug, EntryRepository $entries): Response
     {

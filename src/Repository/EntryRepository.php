@@ -49,6 +49,31 @@ class EntryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Toutes les entrées du journal, sans limite (pour la page /carnet).
+     *
+     * @return Entry[]
+     */
+    public function findAllForJournal(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.publishedAt', 'DESC')
+            ->addOrderBy('e.reference', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Nombre total d'entrées du journal.
+     */
+    public function countForJournal(): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function findOneBySlug(string $slug): ?Entry
     {
         return $this->findOneBy(['slug' => $slug]);
