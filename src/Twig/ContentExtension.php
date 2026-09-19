@@ -83,7 +83,30 @@ class ContentExtension extends AbstractExtension
                 continue;
             }
 
+            // Titre : #, ## ou ### seul sur sa ligne.
+            if (!str_contains($block, "\n") && preg_match('/^(#{1,3})\s+(.+)$/', $block, $m)) {
+                $tag = \strlen($m[1]) >= 3 ? 'h3' : 'h2';
+                $html .= '<'.$tag.'>'.$this->inline($m[2]).'</'.$tag.'>';
+                continue;
+            }
+
             $lines = explode("\n", $block);
+
+            // Citation : toutes les lignes commencent par "> ".
+            $isQuote = [] !== $lines;
+            foreach ($lines as $line) {
+                if (!preg_match('/^>\s?/', $line)) {
+                    $isQuote = false;
+                    break;
+                }
+            }
+            if ($isQuote) {
+                $inner = array_map(static fn (string $l): string => (string) preg_replace('/^>\s?/', '', $l), $lines);
+                $html .= '<blockquote>'.$this->inline(implode("\n", $inner)).'</blockquote>';
+                continue;
+            }
+
+            // Liste : toutes les lignes commencent par "- " ou "* ".
             $isList = true;
             foreach ($lines as $line) {
                 if (!preg_match('/^[-*]\s+/', trim($line))) {
