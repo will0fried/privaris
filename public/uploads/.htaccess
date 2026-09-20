@@ -1,0 +1,18 @@
+# Uploads = fichiers de données uniquement. On interdit l'exécution de tout script.
+<IfModule mod_authz_core.c>
+    <FilesMatch "\.(?i:php|phtml|php[0-9]|phps|pht|cgi|pl|py|sh|asp|aspx|jsp|htaccess)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(?i:php|phtml|php[0-9]|phps|pht|cgi|pl|py|sh|asp|aspx|jsp|htaccess)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+# Neutralise tout handler PHP hérité + coupe l'exécution CGI et le listing
+<IfModule mod_mime.c>
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps .pht
+    RemoveType .php .phtml .php3 .php4 .php5 .php7 .phps .pht
+</IfModule>
+Options -ExecCGI -Indexes

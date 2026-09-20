@@ -26,3 +26,4 @@
 # uploads de contenu (deposes en prod, hors Git sauf le .gitkeep)
 /public/uploads/*
 !/public/uploads/.gitkeep
+!/public/uploads/.htaccess

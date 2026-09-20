@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Entry;
+use App\Entity\EntryImage;
 use App\Entity\Skill;
 use App\Entity\Subscriber;
 use App\Entity\User;
@@ -42,6 +43,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Carnet');
         yield MenuItem::linkToCrud('Entrées', 'fa fa-book-open', Entry::class);
         yield MenuItem::linkToCrud('Compétences', 'fa fa-chart-line', Skill::class);
+        yield MenuItem::linkToCrud('Images', 'fa fa-image', EntryImage::class);
 
         yield MenuItem::section('Audience');
         yield MenuItem::linkToCrud('Abonnés', 'fa fa-envelope', Subscriber::class);

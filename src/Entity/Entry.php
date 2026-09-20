@@ -6,6 +6,8 @@ use App\Enum\EntryStatus;
 use App\Enum\EntryType;
 use App\Repository\EntryRepository;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -93,15 +95,52 @@ class Entry implements \Stringable
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    /**
+     * @var Collection<int, EntryImage>
+     */
+    #[ORM\OneToMany(mappedBy: 'entry', targetEntity: EntryImage::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC', 'id' => 'ASC'])]
+    private Collection $images;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->images = new ArrayCollection();
     }
 
     public function __toString(): string
     {
         return $this->reference ? sprintf('%s · %s', $this->reference, (string) $this->title) : (string) $this->title;
+    }
+
+    /**
+     * @return Collection<int, EntryImage>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(EntryImage $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setEntry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(EntryImage $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            if ($image->getEntry() === $this) {
+                $image->setEntry(null);
+            }
+        }
+
+        return $this;
     }
 
     #[ORM\PrePersist]
