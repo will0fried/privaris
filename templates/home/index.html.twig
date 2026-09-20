@@ -26,14 +26,6 @@
     <span class="kick"><i aria-hidden="true"></i>Sécurité offensive · Défense automatique à l'épreuve</span>
     <h1>Je mesure ce que l'IA <span class="g">promet</span> de défendre.</h1>
     <p class="lead">Chaque entrée est un test que j'ai mené moi-même. Objectif, protocole, observations, ce que j'en retiens. Ce qu'elle établit devient un constat : une affirmation courte, datée, rattachée à l'entrée qui la démontre. <b>Peu de sources, beaucoup de résultats.</b></p>
-    {% if constatMajeur %}
-    <a class="lastc" href="{% if constatMajeur.entry and constatMajeur.entry.published %}{{ path('app_entry_show', {slug: constatMajeur.entry.slug}) }}{% else %}#constat{% endif %}">
-      <span class="lbl">Dernier constat</span>
-      <span class="ref">{{ constatMajeur.reference }}</span>
-      <span class="txt">{{ constatMajeur.enonce|length > 95 ? constatMajeur.enonce|slice(0, 95) ~ '…' : constatMajeur.enonce }}</span>
-      <span class="arw">→</span>
-    </a>
-    {% endif %}
     <div class="herocta">
       <a class="btn p" href="#constat">Voir le dernier constat →</a>
       <a class="btn g" href="#entrees">Lire la méthode</a>

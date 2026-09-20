@@ -603,13 +603,3 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 .home .seclabel .no{display:none}
 .home .seclabel::after{background:var(--line)}
 
-
-/* --- hero : ligne "dernier constat" (option C) --- */
-.home .lastc{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-family:var(--mono);font-size:13px;color:var(--muted);border-left:2px solid var(--amber);padding:4px 0 4px 14px;transition:color .15s;max-width:640px}
-.home .lastc .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.home .lastc .ref{color:var(--amber)}
-.home .lastc .txt{color:var(--text);font-family:var(--body);font-size:14.5px}
-.home .lastc .arw{color:var(--amber)}
-.home .lastc:hover{text-decoration:none}
-.home .lastc:hover .txt{color:var(--amber)}
-@media(max-width:820px){.home .lastc{flex-wrap:wrap;gap:6px 10px}}
