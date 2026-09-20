@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\EntryImage;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -25,6 +27,11 @@ class EntryImageCrudController extends AbstractCrudController
             ->setDefaultSort(['id' => 'DESC']);
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('entry', 'Article');
@@ -38,7 +45,7 @@ class EntryImageCrudController extends AbstractCrudController
             ->setHelp('Sert de légende sous l\'image et de texte alternatif.');
         yield IntegerField::new('position', 'Ordre')->hideOnIndex();
         yield TextField::new('markdown', 'Markdown à coller')
-            ->hideOnForm()
+            ->onlyOnDetail()
             ->setTemplatePath('admin/field/markdown_snippet.html.twig')
             ->setHelp('Clique « Copier », puis colle dans le contenu de l\'article à l\'endroit voulu.');
     }

@@ -1,4 +1,4 @@
-{% set snippet = field.formattedValue %}
+{% set snippet = entity.instance.markdown|default(field.formattedValue) %}
 {% if snippet is empty %}
     <span class="text-muted">—</span>
 {% else %}
