@@ -518,6 +518,9 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 .home .pb:hover .pb-go{color:var(--amber)}
 @media(max-width:820px){.home .proof-band{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.home .proof-band{grid-template-columns:1fr}}
+.home #apropos .about-proofs{margin-top:38px}
+.home #apropos .about-proofs .lbl{margin-bottom:14px}
+
 
 /* --- À propos : texte + fiche latérale --- */
 .home #apropos{padding:72px 0 88px;border-top:1px solid var(--line)}
