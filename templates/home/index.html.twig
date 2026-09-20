@@ -31,14 +31,14 @@
       <a class="btn g" href="#entrees">Lire la méthode</a>
     </div>
     <div class="metrics">
-      <div><div class="n">7<span class="u">j</span></div><div class="l">Le rythme</div></div>
-      <div><div class="n">4</div><div class="l">Sources de terrain</div></div>
-      <div><div class="n">2</div><div class="l">Formats signature</div></div>
       {% if heroConstats > 0 %}
       <div><div class="n">{{ heroConstats }}</div><div class="l">Constats établis</div></div>
       {% else %}
       <div><div class="n">Public</div><div class="l">Protocole &amp; code ouverts</div></div>
       {% endif %}
+      <div><div class="n">{{ heroEntrees }}</div><div class="l">Entrées publiées</div></div>
+      <div><div class="n">4</div><div class="l">Sources de terrain</div></div>
+      <div><div class="n">2</div><div class="l">Formats signature</div></div>
     </div>
   </div>
 </header>
