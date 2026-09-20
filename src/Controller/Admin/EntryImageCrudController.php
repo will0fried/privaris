@@ -39,6 +39,7 @@ class EntryImageCrudController extends AbstractCrudController
         yield IntegerField::new('position', 'Ordre')->hideOnIndex();
         yield TextField::new('markdown', 'Markdown à coller')
             ->hideOnForm()
-            ->setHelp('Copie cette ligne dans le contenu de l\'article, à l\'endroit voulu.');
+            ->setTemplatePath('admin/field/markdown_snippet.html.twig')
+            ->setHelp('Clique « Copier », puis colle dans le contenu de l\'article à l\'endroit voulu.');
     }
 }

@@ -1,0 +1,14 @@
+{% set snippet = field.formattedValue %}
+{% if snippet is empty %}
+    <span class="text-muted">—</span>
+{% else %}
+    <div style="display:flex;gap:6px;align-items:center;max-width:420px">
+        <input type="text" readonly value="{{ snippet }}"
+               onclick="this.select()"
+               style="flex:1;min-width:0;font-family:monospace;font-size:12px;padding:5px 7px;border:1px solid var(--border-color,#ccc);border-radius:5px;background:#f6f7f9;color:#111">
+        <button type="button" class="btn btn-secondary btn-sm"
+                onclick="var i=this.previousElementSibling;i.select();navigator.clipboard&&navigator.clipboard.writeText(i.value);var t=this.textContent;this.textContent='Copié ✓';var b=this;setTimeout(function(){b.textContent=t;},1500);">
+            Copier
+        </button>
+    </div>
+{% endif %}
