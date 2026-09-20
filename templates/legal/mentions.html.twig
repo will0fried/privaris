@@ -6,9 +6,11 @@
 {% block body %}
 <nav>
   <div class="wrap">
-    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
-    <a class="back" href="{{ path('app_home') }}">← Accueil</a>
-    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris"><span class="dot" aria-hidden="true"></span> PRIVARIS</a>
+    <div class="nav-right">
+      <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+      <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+    </div>
   </div>
 </nav>
 

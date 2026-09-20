@@ -425,9 +425,9 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 
 /* --- nav : pastille de marque + CTA arrondi --- */
 .home nav{background:rgba(8,9,11,.72)}
-.home .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(246,167,51,.16);animation:home-pulse 2.6s infinite}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(246,167,51,.16);animation:home-pulse 2.6s infinite}
 @keyframes home-pulse{50%{box-shadow:0 0 0 8px rgba(246,167,51,.03)}}
-.home .nav-cta{border-radius:8px;padding:11px 18px;font-size:12px}
+.nav-cta{border-radius:8px;padding:11px 18px;font-size:12px}
 
 /* --- hero --- */
 .home .hero{padding:88px 0 64px}
@@ -569,7 +569,7 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 .home .ef-all:hover{color:var(--amber);text-decoration:none}
 
 /* ================= Pages d'archive (/constats, /entrees) au style accueil ================= */
-.home .nav-right{display:flex;align-items:center;gap:22px}
+.nav-right{display:flex;align-items:center;gap:22px}
 .home section#contenu,.home #journal{padding:56px 0 48px}
 .home .empty-note{color:var(--muted);font-family:var(--mono);font-size:13px}
 
