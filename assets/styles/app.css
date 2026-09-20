@@ -432,7 +432,7 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 /* --- hero --- */
 .home .hero{padding:88px 0 64px}
 .home .kick{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-line);border-radius:999px;padding:7px 15px;margin-bottom:28px;background:rgba(246,167,51,.05)}
-.home .kick i{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);flex:none}
+.home .kick i{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px rgba(246,167,51,.6);flex:none}
 .home .hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(40px,7.2vw,86px);line-height:.98;letter-spacing:-.025em;max-width:15ch;text-transform:none;margin:0}
 .home .hero h1 .g{background:linear-gradient(96deg,var(--amber),var(--amber2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .home .lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:56ch;margin:26px 0 0}

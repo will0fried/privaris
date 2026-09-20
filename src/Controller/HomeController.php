@@ -16,8 +16,9 @@ class HomeController extends AbstractController
     {
         $majeur = $constats->findConstatMajeur();
 
-        // Vedette : la dernière entrée qui a produit au moins un constat.
-        $featured = $entries->findLatestWithConstats();
+        // Vedette : la dernière entrée qui a produit au moins un constat,
+        // sinon repli sur la dernière entrée publiée (pour ne jamais laisser la section vide).
+        $featured = $entries->findLatestWithConstats() ?? ($entries->findPublished(1)[0] ?? null);
 
         // Les autres entrées récentes (hors la vedette), 3 max, en lignes compactes.
         $recent = $entries->findForJournal(5);
