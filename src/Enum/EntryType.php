@@ -10,7 +10,7 @@ enum EntryType: string
     case LAB = 'lab';
     case WRITEUP = 'writeup';
     case DECRYPTAGE = 'decryptage';
-    case COULISSES = 'coulisses';
+    case VEILLE = 'veille';
 
     public function label(): string
     {
@@ -18,7 +18,7 @@ enum EntryType: string
             self::LAB => 'Lab',
             self::WRITEUP => 'Writeup',
             self::DECRYPTAGE => 'Décryptage',
-            self::COULISSES => 'Coulisses',
+            self::VEILLE => 'Veille',
         };
     }
 
@@ -31,20 +31,20 @@ enum EntryType: string
             self::LAB => 'lab',
             self::WRITEUP => 'wri',
             self::DECRYPTAGE => 'dec',
-            self::COULISSES => 'cou',
+            self::VEILLE => 'vei',
         };
     }
 
     /**
      * Vrai pour les types dont le corps est structuré en 4 champs
      * (Objectif → Protocole → Observations → Ce que j'en retiens).
-     * Faux pour les types en contenu libre (Décryptage, Coulisses).
+     * Faux pour les types en contenu libre (Décryptage, Veille).
      */
     public function hasStructuredBody(): bool
     {
         return match ($this) {
             self::LAB, self::WRITEUP => true,
-            self::DECRYPTAGE, self::COULISSES => false,
+            self::DECRYPTAGE, self::VEILLE => false,
         };
     }
 

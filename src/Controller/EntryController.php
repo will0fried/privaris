@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EntryController extends AbstractController
 {
-    #[Route('/carnet', name: 'app_entry_index', methods: ['GET'])]
+    #[Route('/entrees', name: 'app_entry_index', methods: ['GET'])]
     public function index(EntryRepository $entries): Response
     {
         return $this->render('entry/index.html.twig', [

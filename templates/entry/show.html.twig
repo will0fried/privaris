@@ -9,14 +9,15 @@
 <nav>
   <div class="wrap">
     <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
-    <a class="back" href="{{ path('app_home') }}#journal">← Journal</a>
-    <a class="nav-cta" href="{{ path('app_home') }}#contact">Me contacter</a>
+    <a class="back" href="{{ path('app_home') }}#entrees">← Entrées</a>
+    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
   </div>
 </nav>
 
+<span id="contenu" tabindex="-1"></span>
 <header class="head">
   <div class="wrap col">
-    <div class="crumb"><a href="{{ path('app_home') }}#journal">Journal</a> <span>/</span> <span>{{ entry.reference }}</span> <span class="tagk {{ entry.type.cssClass }}">{{ entry.type.label }}</span></div>
+    <div class="crumb"><a href="{{ path('app_home') }}#entrees">Entrées</a> <span>/</span> <span>{{ entry.reference }}</span> <span class="tagk {{ entry.type.cssClass }}">{{ entry.type.label }}</span></div>
     <h1>{{ entry.title }}</h1>
     <p class="dek">{{ entry.excerpt }}</p>
     <div class="byline">
@@ -25,12 +26,12 @@
       {% if entry.terrain %}<span><b>Terrain</b> {{ entry.terrain }}</span>{% endif %}
       <span><b>Auteur</b> W.</span>
     </div>
-    {% if entry.type.hasStructuredBody and (entry.objectif or entry.duree or entry.outils or entry.prerequis) %}
+    {% if entry.terrain or entry.echantillon or entry.outils or entry.constats|length %}
     <div class="metacard reveal">
-      {% if entry.objectif %}<div><span>Objectif</span><b>{{ entry.objectif|striptags|slice(0, 40)|trim }}{% if entry.objectif|length > 40 %}…{% endif %}</b></div>{% endif %}
-      {% if entry.duree %}<div><span>Durée réelle</span><b>{{ entry.duree }}</b></div>{% endif %}
+      {% if entry.terrain %}<div><span>Terrain</span><b>{{ entry.terrain }}</b></div>{% endif %}
+      {% if entry.echantillon %}<div><span>Échantillon</span><b>{{ entry.echantillon }}</b></div>{% endif %}
       {% if entry.outils %}<div><span>Outils</span><b>{{ entry.outils }}</b></div>{% endif %}
-      {% if entry.prerequis %}<div><span>Prérequis</span><b>{{ entry.prerequis }}</b></div>{% endif %}
+      {% if entry.constats|length %}<div><span>Constats produits</span><b class="ft-constats">{% for c in entry.constats %}<span class="{{ c.retire ? 'retire' : '' }}">{{ c.reference }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</b></div>{% endif %}
     </div>
     {% endif %}
   </div>

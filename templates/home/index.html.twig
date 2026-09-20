@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Privaris · Sécurité offensive et agents de défense{% endblock %}
+{% block body_class %}home{% endblock %}
 
 {% block body %}
 <nav>
   <div class="wrap">
     <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">
-      {{ include('_logo.svg.twig') }} PRIVARIS
+      <span class="dot" aria-hidden="true"></span> PRIVARIS
     </a>
     <div class="nav-links" id="navLinks">
-      {% if skills is not empty %}<a href="#domaines">Domaines</a>{% endif %}<a href="#journal">Journal</a><a href="#preuves">Preuves</a><a href="#apropos">À propos</a>
+      <a href="#constat">Constats</a><a href="#entrees">Entrées</a><a href="#preuves">Preuves</a><a href="#apropos">À propos</a>
     </div>
     <a class="nav-cta" href="#contact">S'abonner</a>
     <button type="button" class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
@@ -19,140 +20,229 @@
   </div>
 </nav>
 
-<section class="hero" id="top">
+{# a) Hero : kicker pastille, grand titre, chiffres #}
+<header class="hero" id="contenu" tabindex="-1">
   <div class="wrap">
-    <div class="hero-l">
-      <div class="h-tag"><span>SÉCURITÉ OFFENSIVE</span><span>·</span><span>AGENTS &amp; IA</span><span>·</span><span><b>● CARNET PUBLIC</b></span></div>
-      <h1>La sécurité offensive, <em>en public</em>.</h1>
-      <p class="lead">Master en cybersécurité, je fais du pentest et je m'intéresse à une question précise&nbsp;: ce qui se passe quand on confie la défense à des agents autonomes et à des LLM. Où ça tient, où ça lâche. Je note tout ici au fur et à mesure&nbsp;: mes labs, mes tests, mes erreurs aussi.</p>
-      <div class="ctas">
-        <a class="btn" href="#journal">Lire le journal</a>
-        <a class="btn ghost" href="#contact">S'abonner</a>
-      </div>
+    <span class="kick"><i aria-hidden="true"></i>Sécurité offensive · Défense automatique à l'épreuve</span>
+    <h1>Je mesure ce que l'IA <span class="g">promet</span> de défendre.</h1>
+    <p class="lead">Chaque entrée est un test que j'ai mené moi-même. Objectif, protocole, observations, ce que j'en retiens. Ce qu'elle établit devient un constat : une affirmation courte, datée, rattachée à l'entrée qui la démontre. <b>Peu de sources, beaucoup de résultats.</b></p>
+    <div class="herocta">
+      <a class="btn p" href="#constat">Voir le dernier constat →</a>
+      <a class="btn g" href="#entrees">Lire la méthode</a>
     </div>
-    <div class="term">
-      <div class="term-bar"><i class="tb1"></i><i class="tb2"></i><i class="tb3"></i><span>privaris — ~/poste-de-terrain</span></div>
-      <div class="term-body" id="term"></div>
+    <div class="metrics">
+      <div><div class="n">{{ heroConstats }}</div><div class="l">Constats établis</div></div>
+      <div><div class="n">15<span class="u">j</span></div><div class="l">Le rythme</div></div>
+      <div><div class="n">4</div><div class="l">Sources de terrain</div></div>
+      <div><div class="n good">0</div><div class="l">Constat effacé</div></div>
     </div>
   </div>
-</section>
+</header>
 
-{% if skills is not empty %}
-<section id="domaines">
+{# b) Constat majeur #}
+{% if constatMajeur %}
+<section class="constat-major" id="constat" aria-label="Constat majeur">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div><div class="lbl">Domaines</div><h2>Ce sur quoi je travaille.</h2></div>
-      <p>Les domaines que je couvre dans le journal, de la reconnaissance réseau au cloud, plus tout ce qui touche aux agents de défense et à l'IA en sécurité. Le radar donne la carte, les articles donnent le détail.</p>
-    </div>
-    <div class="comp">
-      <div class="radar-wrap reveal">
-        <canvas id="radar" width="520" height="520" aria-label="Radar des domaines couverts en sécurité offensive"></canvas>
-        <div class="radar-legend"><span><i style="background:#F6A733"></i>Domaines que je couvre</span></div>
+    <div class="lbl">Constat majeur</div>
+    <div class="feature">
+      <div class="cm-left">
+        <p class="big">{{ constatMajeur.enonce }}</p>
+        <div class="meta">
+          <span class="ref">{{ constatMajeur.reference }}</span>
+          {% if constatMajeur.datePublication %}<span>{{ constatMajeur.datePublication|date('d/m/Y') }}</span>{% endif %}
+          {% if constatMajeur.entry and constatMajeur.entry.published %}<a href="{{ path('app_entry_show', {slug: constatMajeur.entry.slug}) }}">Voir l'entrée qui le démontre →</a>{% endif %}
+        </div>
       </div>
-      <div class="matrix">
-        {% for skill in skills %}
-        <div class="mrow reveal" style="--i:{{ loop.index0 }}"><div class="mk">{{ skill.name }}</div></div>
-        {% endfor %}
+      <div class="cmviz" aria-hidden="true">
+        <svg viewBox="0 0 360 300" role="img" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cmsw" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#35D6C0" stop-opacity=".38"/>
+              <stop offset="1" stop-color="#35D6C0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- anneaux de scan -->
+          <circle class="ring" cx="180" cy="150" r="52" stroke="#35D6C0" stroke-opacity=".14" fill="none"/>
+          <circle class="ring" cx="180" cy="150" r="96" stroke="#35D6C0" stroke-opacity=".10" fill="none"/>
+          <circle class="ring" cx="180" cy="150" r="140" stroke="#35D6C0" stroke-opacity=".06" fill="none" stroke-dasharray="2 4"/>
+          <!-- liaisons -->
+          <g stroke="#333944" stroke-width="1">
+            <line x1="180" y1="150" x2="58" y2="66"/>
+            <line x1="180" y1="150" x2="300" y2="58"/>
+            <line x1="180" y1="150" x2="322" y2="166"/>
+            <line x1="180" y1="150" x2="236" y2="256"/>
+            <line x1="180" y1="150" x2="66" y2="246"/>
+            <line x1="180" y1="150" x2="34" y2="150"/>
+          </g>
+          <!-- balayage radar -->
+          <g class="sweep">
+            <path d="M180 150 L163 14 L180 8 Z" fill="url(#cmsw)"/>
+            <line x1="180" y1="150" x2="180" y2="8" stroke="#35D6C0" stroke-width="1.4" stroke-opacity=".5"/>
+            <circle cx="180" cy="8" r="3" fill="#35D6C0"/>
+          </g>
+          <!-- appareils -->
+          <g>
+            <circle cx="58" cy="66" r="12" fill="#35D6C0" fill-opacity=".12"/><circle class="node" cx="58" cy="66" r="6" fill="#35D6C0"/>
+            <circle cx="300" cy="58" r="13" fill="#F6A733" fill-opacity=".14"/><circle cx="300" cy="58" r="7" fill="#F6A733"/>
+            <circle cx="322" cy="166" r="12" fill="#35D6C0" fill-opacity=".12"/><circle class="node" cx="322" cy="166" r="6" fill="#35D6C0"/>
+            <circle cx="236" cy="256" r="10" fill="#5E636C" fill-opacity=".16"/><circle cx="236" cy="256" r="5" fill="#5E636C"/>
+            <circle cx="66" cy="246" r="11" fill="#5E636C" fill-opacity=".16"/><circle cx="66" cy="246" r="6" fill="#5E636C"/>
+            <circle cx="34" cy="150" r="9" fill="#35D6C0" fill-opacity=".12"/><circle cx="34" cy="150" r="4" fill="#35D6C0"/>
+          </g>
+          <!-- la box, au centre -->
+          <rect x="146" y="130" width="68" height="40" rx="9" fill="#F6A733" fill-opacity=".10" stroke="#F6A733" stroke-width="1.4"/>
+          <circle cx="180" cy="150" r="3" fill="#F6A733"/>
+          <line x1="165" y1="150" x2="171" y2="150" stroke="#F6A733" stroke-width="1.4"/>
+          <line x1="189" y1="150" x2="195" y2="150" stroke="#F6A733" stroke-width="1.4"/>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 {% endif %}
 
-<section id="journal">
+{# c) Ce que j'ai établi #}
+{% if constats is not empty %}
+<section id="constats-recents">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
-      <p>Des labs, des writeups, des décryptages. À chaque fois je note la même chose&nbsp;: ce que je cherchais, comment j'ai fait, ce que j'ai vu, ce que j'en retiens. Ce qui a marché comme ce qui a raté.</p>
+    <div class="sec-head">
+      <div><div class="lbl">Ce que j'ai établi</div><h2 class="h2">Peu de sources. Beaucoup de résultats.</h2></div>
+      <p>Chaque constat est une affirmation courte et vérifiable, rattachée à l'entrée qui la démontre.</p>
     </div>
-    <div class="ledger reveal" id="ledger">
-      <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
-      {% for entry in entries %}
-      <div class="row" data-k="{{ entry.type.cssClass }}">
-        <span class="id">{{ entry.reference }}</span>
-        <span class="k {{ entry.type.cssClass }}">{{ entry.type.label }}</span>
-        <span class="t">
-          {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
-          <small>{{ entry.excerpt }}</small>
-        </span>
-        <span class="s{% if not entry.published %} live{% endif %}">{{ entry.statusLabel }}</span>
-      </div>
+    <div class="clist">
+      {% for c in constats %}
+      {% if c.entry and c.entry.published %}
+      <a class="crow reveal{{ c.retire ? ' retire' : '' }}" href="{{ path('app_entry_show', {slug: c.entry.slug}) }}">
+        <span class="cr-ref">{{ c.reference }}</span>
+        <span class="cr-txt">{{ c.enonce }}</span>
+        <span class="cr-src">{{ c.entry.reference }} →</span>
+      </a>
       {% else %}
-      <div class="row"><span class="t">Le premier article arrive bientôt.</span></div>
+      <div class="crow reveal{{ c.retire ? ' retire' : '' }}">
+        <span class="cr-ref">{{ c.reference }}</span>
+        <span class="cr-txt">{{ c.enonce }}</span>
+        <span class="cr-src">{% if c.entry %}{{ c.entry.reference }}{% endif %}</span>
+      </div>
+      {% endif %}
       {% endfor %}
     </div>
-    {% if total > 6 %}
-    <div class="ledger-more reveal"><a class="btn ghost" href="{{ path('app_entry_index') }}">Voir tout le carnet →</a></div>
+    <div class="more">
+      <a class="btn g" href="{{ path('app_constat_index') }}">Tous les constats ({{ constatsTotal }})</a>
+      <span class="note">Un constat retiré est barré, jamais effacé.</span>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# d) Les entrées #}
+{% if featuredEntry or entries is not empty %}
+<section id="entrees">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="lbl">Les entrées</div><h2 class="h2">Ce qui produit les constats.</h2></div>
+      <p>Le terrain et la méthode derrière les constats. La conclusion, elle, vit dans les constats.</p>
+    </div>
+
+    {% if featuredEntry %}
+      {% set e = featuredEntry %}
+      <article class="entry-feature reveal">
+        <div class="ef-head">
+          <span class="k {{ e.type.cssClass }}">{{ e.type.label }}</span>
+          <span class="ef-ref">{{ e.reference }}</span>
+          {% if e.publishedAt %}<span>{{ e.publishedAt|date('d/m/Y') }}</span>{% endif %}
+          {% if e.readingMinutes %}<span>~{{ e.readingMinutes }} min</span>{% endif %}
+        </div>
+        <h3 class="ef-title">{% if e.published %}<a href="{{ path('app_entry_show', {slug: e.slug}) }}">{{ e.title }}</a>{% else %}{{ e.title }}{% endif %}</h3>
+        <p class="ef-dek">{{ e.excerpt }}</p>
+        <div class="fiche-tech">
+          {% if e.terrain %}<div><span>Terrain</span><b>{{ e.terrain }}</b></div>{% endif %}
+          {% if e.echantillon %}<div><span>Échantillon</span><b>{{ e.echantillon }}</b></div>{% endif %}
+          {% if e.outils %}<div><span>Outils</span><b>{{ e.outils }}</b></div>{% endif %}
+        </div>
+        <div class="ef-foot">
+          {% if e.published %}<a class="ef-read" href="{{ path('app_entry_show', {slug: e.slug}) }}">Lire l'entrée →</a>{% else %}<span></span>{% endif %}
+          <a class="ef-all" href="{{ path('app_entry_index') }}">Toutes les entrées ({{ entriesTotal }}) →</a>
+        </div>
+      </article>
     {% endif %}
   </div>
 </section>
+{% endif %}
 
+{# e) Preuves — bande de 4, un chiffre par source #}
 <section id="preuves">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div><div class="lbl">Preuves</div><h2>De quoi te faire une idée.</h2></div>
-      <p>Pas besoin de me croire sur parole. Mon profil, mes travaux et mon code sont publics, tu peux vérifier par toi-même.</p>
+      <div><div class="lbl">Preuves</div><h2 class="h2">De quoi te faire une idée.</h2></div>
+      <p>Pas besoin de me croire sur parole. Mon profil, mes travaux et mon code sont publics. Tu peux vérifier par toi-même.</p>
     </div>
-    <div class="proof">
-      <a class="pf reveal" href="https://github.com/will0fried/uscb06-agents-cyberdefense" target="_blank" rel="noopener"><div class="pt"><span class="pn">Master Cyber</span><span class="stt ok">Obtenu · 2026</span></div><p>Master Cybersécurité et cyberdéfense. Mon mémoire porte sur les agents autonomes de défense, c'est de là que vient mon angle sur l'IA.</p><span class="arrow">Voir le repo →</span></a>
-      <a class="pf reveal" href="https://tryhackme.com/p/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">TryHackMe</span><span class="stt go">Actif</span></div><p>Là où je m'entraîne. Parcours offensif, machines résolues.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf reveal" href="https://www.root-me.org/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">Root-Me</span><span class="stt go">Actif</span></div><p>Des défis par catégorie&nbsp;: web, réseau, crypto. Score et classement publics.</p><span class="arrow">Voir le profil →</span></a>
-      <a class="pf reveal" href="https://github.com/will0fried" target="_blank" rel="noopener"><div class="pt"><span class="pn">GitHub</span><span class="stt go">Actif</span></div><p>Mes projets, mon mémoire et mes notes de lab. Tout est là, en clair.</p><span class="arrow">github.com/will0fried →</span></a>
-      <div class="pf reveal"><div class="pt"><span class="pn">PNPT / eJPT</span><span class="stt go">En préparation</span></div><p>Des certifs pratiques, notées sur un vrai rapport de test. J'y travaille en ce moment.</p><span class="arrow">Suivi au journal</span></div>
+    <div class="proof-band">
+      <a class="pb reveal" href="https://github.com/will0fried/uscb06-agents-cyberdefense" target="_blank" rel="noopener">
+        <b class="pb-num">Mémoire 2026</b>
+        <span class="pb-src">Master Cyber &amp; Cyberdéfense</span>
+        <span class="pb-go">Agents autonomes de défense →</span>
+      </a>
+      <a class="pb reveal" href="https://tryhackme.com/p/will0fried" target="_blank" rel="noopener">
+        <b class="pb-num">TryHackMe</b>
+        <span class="pb-src">Machines &amp; write-ups</span>
+        <span class="pb-go">Voir le profil →</span>
+      </a>
+      <a class="pb reveal" href="https://www.root-me.org/will0fried" target="_blank" rel="noopener">
+        <b class="pb-num">Root-Me</b>
+        <span class="pb-src">Épreuves &amp; classement</span>
+        <span class="pb-go">Voir le profil →</span>
+      </a>
+      <a class="pb reveal" href="https://github.com/will0fried" target="_blank" rel="noopener">
+        <b class="pb-num">GitHub</b>
+        <span class="pb-src">Code &amp; projets publics</span>
+        <span class="pb-go">github.com/will0fried →</span>
+      </a>
     </div>
   </div>
 </section>
 
+{# f) À propos — le mémoire d'abord, la reconversion ensuite #}
 <section id="apropos">
   <div class="wrap">
-    <div class="sec-head reveal"><div><div class="lbl">À propos</div><h2>Qui je suis.</h2></div></div>
+    <div class="sec-head reveal"><div><div class="lbl">À propos</div><h2 class="h2">Qui je suis.</h2></div></div>
     <div class="about reveal">
       <div>
-        <p>Je suis en reconversion vers la sécurité offensive. J'ai un master en cybersécurité et cyberdéfense, et en parallèle je dirige un magasin Orange. Mon mémoire portait sur les agents autonomes de cyberdéfense&nbsp;: comment une IA peut repérer une attaque et y répondre seule, et surtout où elle se plante. Privaris, c'est là que je continue ce travail en public.</p>
-        <p>Ce qui m'intéresse, c'est le croisement entre le pentest et l'automatisation. Beaucoup de gens testent des systèmes. Moi j'essaie aussi de comprendre pourquoi les outils censés défendre, agents et LLM compris, laissent passer des choses qu'un humain aurait vues. C'est ce fil que tu retrouves dans le journal.</p>
+        <p>Mon mémoire de master portait sur les agents autonomes de cyberdéfense. Alors j'en ai construit un, je lui ai donné les commandes d'un réseau à défendre, et je l'ai regardé se tromper là où personne ne le montre. Privaris, c'est l'endroit où je continue ce travail en public, résultat par résultat.</p>
+        <p>En parallèle, je dirige un magasin Orange et je suis en reconversion vers la sécurité offensive. Ce qui m'intéresse, c'est le croisement entre le pentest et l'automatisation&nbsp;: comprendre pourquoi les outils censés défendre, agents et LLM compris, laissent passer ce qu'un humain aurait vu.</p>
         <div class="sig">W.</div>
       </div>
       <div class="facts">
         <div><span>Formation</span>Master Cybersécurité &amp; Cyberdéfense (2026)</div>
         <div><span>Métier</span>Directeur de magasin Orange, en parallèle</div>
-        <div><span>Ce que je fais ici</span>Sécurité offensive et limites de l'IA en défense</div>
         <div><span>Domaines</span>Réseau, web, cloud, détection, agents &amp; IA</div>
         <div><span>Base</span>Besançon</div>
-        <div><span>Le mieux pour suivre</span>La newsletter</div>
+        <div><span>Le mieux pour suivre</span><a href="#contact">La newsletter</a></div>
       </div>
     </div>
   </div>
 </section>
 
+{# g) Newsletter — bandeau conversion (maquette) #}
 <section class="contact" id="contact">
   <div class="wrap">
-    <div>
-      <div class="lbl" style="margin-bottom:16px">Suivre &amp; échanger</div>
-      <h2 style="margin-bottom:14px">Ne rien rater du journal.</h2>
-      <p>Nouveau lab, writeup ou article&nbsp;: tu le reçois par mail, sans spam. Et si tu veux réagir ou en discuter, écris-moi, je réponds.</p>
+    <div class="final reveal">
+      <h3>Le prochain constat tombe dimanche.</h3>
+      <p>Un résultat mesuré par semaine, dans ta boîte mail. Pas de bruit, pas de hype.</p>
       {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
       {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
-    </div>
-    <div class="cc-card reveal">
-      <span>Newsletter — Le relevé du dimanche</span>
-      <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="nl-form">
+      <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="formrow">
         <input type="hidden" name="_token" value="{{ csrf_token('newsletter') }}">
-        {# Piège à bots : invisible pour un humain, rempli seulement par les robots #}
         <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
           <label>Laissez ce champ vide<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
         <input type="email" name="email" required placeholder="votre@email.fr" aria-label="Votre e-mail">
-        <button type="submit">S'abonner</button>
+        <button type="submit" class="btn p">S'abonner</button>
       </form>
-      <p class="nl-consent">Un e-mail de confirmation valide votre inscription. Désinscription en un clic, à tout moment. Voir la <a href="{{ path('app_legal_privacy') }}">politique de confidentialité</a>.</p>
-      <span>Écrire</span><a href="mailto:{{ site_email }}">{{ site_email }}</a>
+      <p class="consent">Un e-mail de confirmation valide votre inscription. Désinscription en un clic, à tout moment. Voir la <a href="{{ path('app_legal_privacy') }}">politique de confidentialité</a>.</p>
+      <p class="write">Écrire : <a href="mailto:{{ site_email }}">{{ site_email }}</a></p>
     </div>
   </div>
 </section>
 
 <div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
-
-<script type="application/json" id="skills-data">
-{{- skills|map(s => {'s': s.shortLabel})|json_encode|raw -}}
-</script>
 {% endblock %}

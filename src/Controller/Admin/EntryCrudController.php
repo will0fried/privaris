@@ -126,6 +126,7 @@ HTML;
 
         yield FormField::addFieldset('Métadonnées');
         yield TextField::new('terrain', 'Terrain')->hideOnIndex();
+        yield TextField::new('echantillon', 'Échantillon')->hideOnIndex();
         yield TextField::new('duree', 'Durée réelle')->hideOnIndex();
         yield TextField::new('outils', 'Outils')->hideOnIndex();
         yield TextField::new('prerequis', 'Prérequis')->hideOnIndex();

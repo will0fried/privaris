@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les constats — Privaris{% endblock %}
+{% block meta_description %}Tous les constats de Privaris : des affirmations datées et vérifiables, chacune rattachée à l'entrée qui la démontre.{% endblock %}
+{% block body_class %}home{% endblock %}
+
+{% block body %}
+<nav>
+  <div class="wrap">
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris"><span class="dot" aria-hidden="true"></span> PRIVARIS</a>
+    <div class="nav-right">
+      <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+      <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+    </div>
+  </div>
+</nav>
+
+<section id="contenu" tabindex="-1">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="lbl">Constats</div><h2 class="h2">Tout ce que j'ai établi.</h2></div>
+      <p>Chaque ligne est une affirmation datée, rattachée à l'entrée qui la démontre. Un constat retiré est barré, jamais effacé.</p>
+    </div>
+
+    {% if actifs is empty and retires is empty %}
+    <p class="empty-note">Le premier constat arrive bientôt.</p>
+    {% endif %}
+
+    {% if actifs is not empty %}
+    <div class="constats-list">
+      {% for c in actifs %}
+      <article class="constat-line reveal">
+        <div class="cl-ref">{{ c.reference }}{% if c.datePublication %}<span>{{ c.datePublication|date('d/m/Y') }}</span>{% endif %}</div>
+        <p class="cl-enonce">{{ c.enonce }}</p>
+        {% if c.entry and c.entry.published %}<a class="cl-src" href="{{ path('app_entry_show', {slug: c.entry.slug}) }}">{{ c.entry.reference }} · {{ c.entry.title }} →</a>{% elseif c.entry %}<span class="cl-src">{{ c.entry.reference }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if retires is not empty %}
+    <div class="retires-head reveal">
+      <div class="lbl">Constats retirés</div>
+      <p>Retirés du fil, conservés barrés — jamais effacés.</p>
+    </div>
+    <div class="constats-list">
+      {% for c in retires %}
+      <article class="constat-line retire reveal">
+        <div class="cl-ref">{{ c.reference }}{% if c.datePublication %}<span>{{ c.datePublication|date('d/m/Y') }}</span>{% endif %}</div>
+        <p class="cl-enonce">{{ c.enonce }}</p>
+        {% if c.entry and c.entry.published %}<a class="cl-src" href="{{ path('app_entry_show', {slug: c.entry.slug}) }}">{{ c.entry.reference }} · {{ c.entry.title }} →</a>{% elseif c.entry %}<span class="cl-src">{{ c.entry.reference }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="wrap"><footer><span>© {{ "now"|date("Y") }} Privaris · Besançon</span><span><a href="{{ path('app_legal_mentions') }}">Mentions légales</a> · <a href="{{ path('app_legal_privacy') }}">Confidentialité</a></span><span><a href="{{ path('app_rss') }}">Flux RSS</a></span></footer></div>
+{% endblock %}

@@ -1,29 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le carnet — Privaris{% endblock %}
-{% block meta_description %}Tous les labs, writeups, décryptages et coulisses du carnet Privaris.{% endblock %}
+{% block title %}Les entrées — Privaris{% endblock %}
+{% block meta_description %}Tous les labs, writeups, décryptages et veille du carnet Privaris.{% endblock %}
+{% block body_class %}home{% endblock %}
 
 {% block body %}
 <nav>
   <div class="wrap">
-    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris">{{ include('_logo.svg.twig') }} PRIVARIS</a>
-    <a class="back" href="{{ path('app_home') }}">← Accueil</a>
-    <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+    <a class="brand" href="{{ path('app_home') }}" aria-label="Privaris"><span class="dot" aria-hidden="true"></span> PRIVARIS</a>
+    <div class="nav-right">
+      <a class="back" href="{{ path('app_home') }}">← Accueil</a>
+      <a class="nav-cta" href="{{ path('app_home') }}#contact">S'abonner</a>
+    </div>
   </div>
 </nav>
 
-<section id="journal">
+<section id="journal"><span id="contenu" tabindex="-1"></span>
   <div class="wrap">
     <div class="sec-head reveal">
-      <div><div class="lbl">Journal</div><h2>Le carnet de terrain.</h2></div>
-      <p>Tout ce que je publie ici&nbsp;: labs, writeups, décryptages, coulisses. Filtre par type, ou parcours tout dans l'ordre.</p>
+      <div><div class="lbl">Entrées</div><h2 class="h2">Toutes les entrées.</h2></div>
+      <p>Tout ce que je publie ici&nbsp;: labs, writeups, décryptages, veille. Filtre par type, ou parcours tout dans l'ordre.</p>
     </div>
     <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
       <button class="cat on" data-k="all">Tout</button>
       <button class="cat" data-k="lab">Labs</button>
       <button class="cat" data-k="wri">Writeups</button>
       <button class="cat" data-k="dec">Décryptages</button>
-      <button class="cat" data-k="cou">Coulisses</button>
+      <button class="cat" data-k="vei">Veille</button>
     </div>
     <div class="ledger reveal" id="ledger">
       <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>

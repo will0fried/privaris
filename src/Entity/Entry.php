@@ -70,6 +70,9 @@ class Entry implements \Stringable
     #[ORM\Column(length: 60, nullable: true)]
     private ?string $terrain = null;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $echantillon = null;
+
     #[ORM\Column(length: 120, nullable: true)]
     private ?string $outils = null;
 
@@ -102,11 +105,19 @@ class Entry implements \Stringable
     #[ORM\OrderBy(['position' => 'ASC', 'id' => 'ASC'])]
     private Collection $images;
 
+    /**
+     * @var Collection<int, Constat>
+     */
+    #[ORM\OneToMany(mappedBy: 'entry', targetEntity: Constat::class)]
+    #[ORM\OrderBy(['reference' => 'ASC'])]
+    private Collection $constats;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
+        $this->constats = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -137,6 +148,48 @@ class Entry implements \Stringable
         if ($this->images->removeElement($image)) {
             if ($image->getEntry() === $this) {
                 $image->setEntry(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Constat>
+     */
+    public function getConstats(): Collection
+    {
+        return $this->constats;
+    }
+
+    /**
+     * Constats visibles (non retirés), pour la fiche technique.
+     *
+     * @return Constat[]
+     */
+    public function getConstatsVisibles(): array
+    {
+        return array_values(array_filter(
+            $this->constats->toArray(),
+            static fn (Constat $c): bool => !$c->isRetire()
+        ));
+    }
+
+    public function addConstat(Constat $constat): static
+    {
+        if (!$this->constats->contains($constat)) {
+            $this->constats->add($constat);
+            $constat->setEntry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConstat(Constat $constat): static
+    {
+        if ($this->constats->removeElement($constat)) {
+            if ($constat->getEntry() === $this) {
+                $constat->setEntry(null);
             }
         }
 
@@ -351,6 +404,18 @@ class Entry implements \Stringable
     public function setTerrain(?string $terrain): static
     {
         $this->terrain = $terrain;
+
+        return $this;
+    }
+
+    public function getEchantillon(): ?string
+    {
+        return $this->echantillon;
+    }
+
+    public function setEchantillon(?string $echantillon): static
+    {
+        $this->echantillon = $echantillon;
 
         return $this;
     }

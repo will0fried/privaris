@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ConstatRepository;
 use App\Repository\EntryRepository;
 use App\Repository\SkillRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +12,33 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home', methods: ['GET'])]
-    public function index(SkillRepository $skills, EntryRepository $entries): Response
+    public function index(SkillRepository $skills, EntryRepository $entries, ConstatRepository $constats): Response
     {
+        $majeur = $constats->findConstatMajeur();
+
+        // Vedette : la dernière entrée qui a produit au moins un constat.
+        $featured = $entries->findLatestWithConstats();
+
+        // Les autres entrées récentes (hors la vedette), 3 max, en lignes compactes.
+        $recent = $entries->findForJournal(5);
+        $others = array_values(array_filter(
+            $recent,
+            static fn ($e): bool => null === $featured || $e->getId() !== $featured->getId()
+        ));
+
+        $lastPublished = $entries->findPublished(1)[0] ?? null;
+
         return $this->render('home/index.html.twig', [
             'skills' => $skills->findAllOrdered(),
-            'entries' => $entries->findForJournal(6),
-            'total' => $entries->countForJournal(),
+            'constatMajeur' => $majeur,
+            'constats' => $constats->findRecents(4, $majeur),
+            'constatsTotal' => $constats->countAll(),
+            'featuredEntry' => $featured,
+            'entries' => \array_slice($others, 0, 3),
+            'entriesTotal' => $entries->countForJournal(),
+            'heroConstats' => $constats->countActifs(),
+            'heroEntrees' => $entries->countPublished(),
+            'heroLastDate' => $lastPublished?->getPublishedAt(),
         ]);
     }
 }

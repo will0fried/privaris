@@ -15,6 +15,7 @@
     <meta property="og:description" content="{{ block('meta_description') }}">
     <meta property="og:image" content="{% block og_image %}{{ absolute_url('/og.png') }}{% endblock %}">
     <meta property="og:url" content="{{ app.request.uri }}">
+    <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ block('title') }}">
     <meta name="twitter:description" content="{{ block('meta_description') }}">
@@ -29,7 +30,9 @@
     {% block stylesheets %}{% endblock %}
     {{ importmap('app') }}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="bgfx" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
 {% block body %}{% endblock %}
 <button type="button" id="toTop" class="to-top" aria-label="Remonter en haut" title="Remonter en haut">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
