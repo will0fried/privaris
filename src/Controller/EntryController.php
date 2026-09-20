@@ -14,7 +14,7 @@ class EntryController extends AbstractController
     public function index(EntryRepository $entries): Response
     {
         return $this->render('entry/index.html.twig', [
-            'entries' => $entries->findAllForJournal(),
+            'entries' => $entries->findPublished(100),
         ]);
     }
 
@@ -28,7 +28,7 @@ class EntryController extends AbstractController
         }
 
         // Entrées précédente / suivante par référence (PRV-000X).
-        $all = $entries->findForJournal(100);
+        $all = $entries->findPublished(100);
         // Ordonnées par référence croissante pour une navigation naturelle.
         usort($all, static fn (Entry $a, Entry $b) => strcmp((string) $a->getReference(), (string) $b->getReference()));
 

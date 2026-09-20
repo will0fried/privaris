@@ -567,7 +567,7 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 
 /* ================= Pages d'archive (/constats, /entrees) au style accueil ================= */
 .home .nav-right{display:flex;align-items:center;gap:22px}
-.home section#contenu,.home #journal{padding:56px 0 84px}
+.home section#contenu,.home #journal{padding:56px 0 48px}
 .home .empty-note{color:var(--muted);font-family:var(--mono);font-size:13px}
 
 /* /constats : liste au style accueil */

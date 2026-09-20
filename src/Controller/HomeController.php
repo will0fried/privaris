@@ -21,7 +21,7 @@ class HomeController extends AbstractController
         $featured = $entries->findLatestWithConstats() ?? ($entries->findPublished(1)[0] ?? null);
 
         // Les autres entrées récentes (hors la vedette), 3 max, en lignes compactes.
-        $recent = $entries->findForJournal(5);
+        $recent = $entries->findPublished(5);
         $others = array_values(array_filter(
             $recent,
             static fn ($e): bool => null === $featured || $e->getId() !== $featured->getId()

@@ -21,6 +21,7 @@
       <div><div class="lbl">Entrées</div><h2 class="h2">Toutes les entrées.</h2></div>
       <p>Tout ce que je publie ici&nbsp;: labs, writeups, décryptages, veille. Filtre par type, ou parcours tout dans l'ordre.</p>
     </div>
+    {% if entries|length >= 6 %}
     <div class="cats reveal" role="group" aria-label="Filtrer le carnet">
       <button class="cat on" data-k="all">Tout</button>
       <button class="cat" data-k="lab">Labs</button>
@@ -28,8 +29,9 @@
       <button class="cat" data-k="dec">Décryptages</button>
       <button class="cat" data-k="vei">Veille</button>
     </div>
+    {% endif %}
     <div class="ledger reveal" id="ledger">
-      <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Statut</span></div>
+      <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Date</span></div>
       {% for entry in entries %}
       <div class="row" data-k="{{ entry.type.cssClass }}">
         <span class="id">{{ entry.reference }}</span>
@@ -38,7 +40,7 @@
           {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
           <small>{{ entry.excerpt }}</small>
         </span>
-        <span class="s{% if not entry.published %} live{% endif %}">{{ entry.statusLabel }}</span>
+        <span class="s">{{ entry.publishedAt ? entry.publishedAt|date('d/m/Y') : '—' }}</span>
       </div>
       {% else %}
       <div class="row"><span class="t">Le premier article arrive bientôt.</span></div>
