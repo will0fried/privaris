@@ -112,6 +112,18 @@ class ContentExtension extends AbstractExtension
         return $out.'</div>';
     }
 
+    private function renderFigure(string $alt, string $src): string
+    {
+        $srcEsc = htmlspecialchars($src, \ENT_QUOTES, 'UTF-8');
+        $altEsc = htmlspecialchars($alt, \ENT_QUOTES, 'UTF-8');
+        $fig = '<figure class="c-fig"><img src="'.$srcEsc.'" alt="'.$altEsc.'" loading="lazy">';
+        if ('' !== trim($alt)) {
+            $fig .= '<figcaption>'.$this->inline($alt).'</figcaption>';
+        }
+
+        return $fig.'</figure>';
+    }
+
     private function renderProse(string $text): string
     {
         $text = trim($text, "\n");
@@ -125,6 +137,12 @@ class ContentExtension extends AbstractExtension
         foreach ($blocks as $block) {
             $block = trim($block);
             if ('' === $block) {
+                continue;
+            }
+
+            // Image seule sur sa ligne : ![alt](chemin) -> figure + legende.
+            if (!str_contains($block, "\n") && preg_match('/^!\[([^\]]*)\]\(([^)\s]+)\)$/', $block, $m)) {
+                $html .= $this->renderFigure($m[1], $m[2]);
                 continue;
             }
 
@@ -182,6 +200,12 @@ class ContentExtension extends AbstractExtension
         $text = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $text);
         // `code en ligne`
         $text = preg_replace('/`([^`]+)`/', '<code class="inl">$1</code>', $text);
+        // image ![alt](chemin) au fil du texte (le src est deja echappe par htmlspecialchars ci-dessus)
+        $text = preg_replace(
+            '/!\[([^\]]*)\]\(([^)\s]+)\)/',
+            '<img src="$2" alt="$1" loading="lazy">',
+            $text
+        );
         // [texte](https://lien)
         $text = preg_replace(
             '/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/',

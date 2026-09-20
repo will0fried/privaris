@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -130,5 +131,14 @@ HTML;
         yield TextField::new('prerequis', 'Prérequis')->hideOnIndex();
         yield IntegerField::new('readingMinutes', 'Minutes de lecture')->hideOnIndex();
         yield UrlField::new('videoUrl', 'Vidéo (URL)')->hideOnIndex();
+
+        yield FormField::addFieldset('Partage (réseaux sociaux)');
+        yield ImageField::new('shareImage', 'Image de partage')
+            ->setBasePath('uploads/carnet')
+            ->setUploadDir('public/uploads/carnet')
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
+            ->setRequired(false)
+            ->setHelp('Aperçu LinkedIn / Twitter (idéal ~1200×630). Sans image, l\'aperçu par défaut du site est utilisé.')
+            ->hideOnIndex();
     }
 }

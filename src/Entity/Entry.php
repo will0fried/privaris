@@ -57,6 +57,9 @@ class Entry implements \Stringable
     private ?string $content = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $shareImage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $videoUrl = null;
 
     #[ORM\Column(nullable: true)]
@@ -261,6 +264,18 @@ class Entry implements \Stringable
     public function setContent(?string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getShareImage(): ?string
+    {
+        return $this->shareImage;
+    }
+
+    public function setShareImage(?string $shareImage): static
+    {
+        $this->shareImage = $shareImage;
 
         return $this;
     }

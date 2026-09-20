@@ -13,12 +13,12 @@
     <meta property="og:site_name" content="Privaris">
     <meta property="og:title" content="{{ block('title') }}">
     <meta property="og:description" content="{{ block('meta_description') }}">
-    <meta property="og:image" content="{{ absolute_url('/og.png') }}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url('/og.png') }}{% endblock %}">
     <meta property="og:url" content="{{ app.request.uri }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ block('title') }}">
     <meta name="twitter:description" content="{{ block('meta_description') }}">
-    <meta name="twitter:image" content="{{ absolute_url('/og.png') }}">
+    <meta name="twitter:image" content="{{ block('og_image') }}">
 
     <script>document.documentElement.className += ' js';</script>
 

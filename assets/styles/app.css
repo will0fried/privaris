@@ -357,3 +357,9 @@ html.js .proof .pf.reveal:nth-child(6){transition-delay:300ms}
 .scoreboard .sval{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .scoreboard .sval.bad{color:#F0524B}
 .scoreboard .sval.good{color:var(--teal)}
+
+/* images de contenu (filtre |carnet) */
+.c-fig{margin:26px 0}
+.c-fig img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+.c-fig figcaption{margin-top:8px;color:var(--muted);font-size:13.5px;font-style:italic;line-height:1.5}
+.prose img,.note img{max-width:100%;height:auto;border-radius:8px}

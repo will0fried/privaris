@@ -22,3 +22,7 @@
 
 # sauvegardes locales
 *.bak
+
+# uploads de contenu (deposes en prod, hors Git sauf le .gitkeep)
+/public/uploads/*
+!/public/uploads/.gitkeep

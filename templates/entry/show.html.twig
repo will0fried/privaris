@@ -2,6 +2,7 @@
 
 {% block title %}{{ entry.title }} — Privaris{% endblock %}
 {% block meta_description %}{{ entry.excerpt }}{% endblock %}
+{% block og_image %}{% if entry.shareImage %}{{ absolute_url('/uploads/carnet/' ~ entry.shareImage) }}{% else %}{{ absolute_url('/og.png') }}{% endif %}{% endblock %}
 
 {% block body %}
 <div class="prog" id="prog"></div>
