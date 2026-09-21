@@ -32,11 +32,11 @@
     </div>
     <div class="metrics">
       {% if heroConstats > 0 %}
-      <div><div class="n">{{ heroConstats }}</div><div class="l">Constats établis</div></div>
+      <div><div class="n">{{ heroConstats }}</div><div class="l">{{ heroConstats > 1 ? 'Constats établis' : 'Constat établi' }}</div></div>
       {% else %}
       <div><div class="n">Public</div><div class="l">Protocole &amp; code ouverts</div></div>
       {% endif %}
-      <div><div class="n">{{ heroEntrees }}</div><div class="l">Entrées publiées</div></div>
+      <div><div class="n">{{ heroEntrees }}</div><div class="l">{{ heroEntrees > 1 ? 'Entrées publiées' : 'Entrée publiée' }}</div></div>
       <div><div class="n">4</div><div class="l">Sources de terrain</div></div>
       <div><div class="n">2</div><div class="l">Formats signature</div></div>
     </div>
@@ -110,7 +110,7 @@
 <section id="constats-recents">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="lbl">Ce que j'ai établi</div><h2 class="h2">Peu de sources. Beaucoup de résultats.</h2></div>
+      <div><div class="lbl">Ce que j'ai établi</div><h2 class="h2">Court, daté, vérifiable.</h2></div>
       <p>Chaque constat est une affirmation courte et vérifiable, rattachée à l'entrée qui la démontre.</p>
     </div>
     <div class="clist">
