@@ -57,6 +57,7 @@ class EntryCrudController extends AbstractCrudController
     });
 })();
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
 <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 <script>
@@ -73,7 +74,7 @@ class EntryCrudController extends AbstractCrudController
                 element: ta,
                 spellChecker: false,
                 status: false,
-                autoDownloadFontAwesome: true,
+                autoDownloadFontAwesome: false,
                 minHeight: '160px',
                 uploadImage: true,
                 imageMaxSize: 8 * 1024 * 1024,
