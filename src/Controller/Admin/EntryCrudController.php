@@ -57,8 +57,21 @@ class EntryCrudController extends AbstractCrudController
     });
 })();
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<style>
+.editor-toolbar .mde-t{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif!important;width:auto!important;min-width:32px;padding:0 8px!important;font-size:12px;line-height:30px;color:#2b2f36}
+.editor-toolbar .mde-t::before{font-family:inherit!important;font-size:inherit}
+.editor-toolbar .mde-bold::before{content:"B";font-weight:800}
+.editor-toolbar .mde-italic::before{content:"I";font-style:italic;font-weight:600}
+.editor-toolbar .mde-head::before{content:"H";font-weight:700}
+.editor-toolbar .mde-quote::before{content:"\201D";font-weight:800}
+.editor-toolbar .mde-ul::before{content:"\2022 \2022";letter-spacing:1px;font-weight:800}
+.editor-toolbar .mde-ol::before{content:"1."}
+.editor-toolbar .mde-link::before{content:"Lien";font-size:11px}
+.editor-toolbar .mde-img::before{content:"Image";font-size:11px;font-weight:700;color:#b9770e}
+.editor-toolbar .mde-code::before{content:"</>";font-size:11px;font-weight:700}
+.editor-toolbar .mde-eye::before{content:"Aperçu";font-size:11px}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 <script>
 (function () {
@@ -88,7 +101,7 @@ class EntryCrudController extends AbstractCrudController
                     sbOnUploaded: 'Image ajoutée'
                 },
                 errorMessages: { imageTooLarge: 'Image trop lourde (8 Mo maximum).' },
-                toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', 'code', '|', 'preview', 'guide']
+                toolbar: [{name:'bold',action:EasyMDE.toggleBold,className:'mde-t mde-bold',title:'Gras'},{name:'italic',action:EasyMDE.toggleItalic,className:'mde-t mde-italic',title:'Italique'},{name:'heading',action:EasyMDE.toggleHeadingSmaller,className:'mde-t mde-head',title:'Titre'},'|',{name:'quote',action:EasyMDE.toggleBlockquote,className:'mde-t mde-quote',title:'Citation'},{name:'ul',action:EasyMDE.toggleUnorderedList,className:'mde-t mde-ul',title:'Liste à puces'},{name:'ol',action:EasyMDE.toggleOrderedList,className:'mde-t mde-ol',title:'Liste numérotée'},'|',{name:'link',action:EasyMDE.drawLink,className:'mde-t mde-link',title:'Lien'},{name:'upload-image',action:EasyMDE.drawUploadedImage,className:'mde-t mde-img',title:'Ajouter une image (ou glisser-déposer / coller)'},{name:'code',action:EasyMDE.toggleCodeBlock,className:'mde-t mde-code',title:'Bloc de code'},'|',{name:'preview',action:EasyMDE.togglePreview,className:'mde-t mde-eye no-disable',title:'Aperçu'}]
             });
             editors.push(mde);
         });
