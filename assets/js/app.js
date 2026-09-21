@@ -23,7 +23,7 @@
       var k = c.dataset.k;
       var visible = 0;
       rows.forEach(function (r) {
-        var hide = (k !== 'all' && r.dataset.k !== k);
+        var hide = (k !== 'all' && (' ' + r.dataset.k + ' ').indexOf(' ' + k + ' ') === -1);
         r.hidden = hide;
         if (!hide) { visible++; }
       });

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Enum\EntryStatus;
+use App\Enum\EntrySerie;
 use App\Enum\EntryType;
 use App\Repository\EntryRepository;
 use Doctrine\DBAL\Types\Types;
@@ -35,6 +36,9 @@ class Entry implements \Stringable
 
     #[ORM\Column(length: 20, enumType: EntryType::class)]
     private EntryType $type = EntryType::LAB;
+
+    #[ORM\Column(length: 20, enumType: EntrySerie::class, nullable: true)]
+    private ?EntrySerie $serie = null;
 
     #[ORM\Column(length: 20, enumType: EntryStatus::class)]
     private EntryStatus $status = EntryStatus::DRAFT;
@@ -272,6 +276,18 @@ class Entry implements \Stringable
     public function setType(EntryType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSerie(): ?EntrySerie
+    {
+        return $this->serie;
+    }
+
+    public function setSerie(?EntrySerie $serie): static
+    {
+        $this->serie = $serie;
 
         return $this;
     }

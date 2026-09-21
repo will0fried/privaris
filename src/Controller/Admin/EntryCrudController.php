@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Entry;
 use App\Enum\EntryStatus;
+use App\Enum\EntrySerie;
 use App\Enum\EntryType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -93,6 +94,16 @@ HTML;
             ->setFormTypeOption('choice_value', static fn (?EntryStatus $s) => $s?->value)
             ->renderAsBadges()
             ->setColumns(6);
+        yield ChoiceField::new('serie', 'Série')
+            ->setChoices(array_combine(
+                array_map(static fn (EntrySerie $s) => $s->label(), EntrySerie::cases()),
+                EntrySerie::cases(),
+            ))
+            ->setFormTypeOption('choice_value', static fn (?EntrySerie $s) => $s?->value)
+            ->setRequired(false)
+            ->renderAsBadges()
+            ->setColumns(6)
+            ->setHelp('Optionnel — Rejeu (rejouer un incident) ou VenduIA (tester un outil vendu IA). Vide = hors serie.');
 
         yield FormField::addFieldset('Résumé')->collapsible();
         yield TextareaField::new('excerpt', 'Chapô / résumé')

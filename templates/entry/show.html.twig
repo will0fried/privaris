@@ -20,7 +20,7 @@
 <span id="contenu" tabindex="-1"></span>
 <header class="head">
   <div class="wrap col">
-    <div class="crumb"><a href="{{ path('app_home') }}#entrees">Entrées</a> <span>/</span> <span>{{ entry.reference }}</span> <span class="tagk {{ entry.type.cssClass }}">{{ entry.type.label }}</span></div>
+    <div class="crumb"><a href="{{ path('app_home') }}#entrees">Entrées</a> <span>/</span> <span>{{ entry.reference }}</span> <span class="tagk {{ entry.type.cssClass }}">{{ entry.type.label }}</span>{% if entry.serie %} <span class="tagk serie serie-{{ entry.serie.cssClass }}">{{ entry.serie.label }}</span>{% endif %}</div>
     <h1>{{ entry.title }}</h1>
     <p class="dek">{{ entry.excerpt }}</p>
     <div class="byline">

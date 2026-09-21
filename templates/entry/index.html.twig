@@ -28,16 +28,18 @@
       <button class="cat" data-k="wri">Writeups</button>
       <button class="cat" data-k="dec">Décryptages</button>
       <button class="cat" data-k="vei">Veille</button>
+      {% if entries|filter(e => e.serie and e.serie.value == 'rejeu')|length %}<button class="cat" data-k="serie-rejeu">Rejeu</button>{% endif %}
+      {% if entries|filter(e => e.serie and e.serie.value == 'vendu_ia')|length %}<button class="cat" data-k="serie-venduia">VenduIA</button>{% endif %}
     </div>
     {% endif %}
     <div class="ledger reveal" id="ledger">
       <div class="row"><span>Réf.</span><span>Type</span><span>Entrée</span><span style="text-align:right">Date</span></div>
       {% for entry in entries %}
-      <div class="row" data-k="{{ entry.type.cssClass }}">
+      <div class="row" data-k="{{ entry.type.cssClass }}{% if entry.serie %} serie-{{ entry.serie.cssClass }}{% endif %}">
         <span class="id">{{ entry.reference }}</span>
         <span class="k {{ entry.type.cssClass }}">{{ entry.type.label }}</span>
         <span class="t">
-          {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}
+          {% if entry.published %}<a href="{{ path('app_entry_show', {slug: entry.slug}) }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}{% if entry.serie %} <span class="serie serie-{{ entry.serie.cssClass }}">{{ entry.serie.label }}</span>{% endif %}
           <small>{{ entry.excerpt }}</small>
         </span>
         <span class="s">{{ entry.publishedAt ? entry.publishedAt|date('d/m/Y') : '—' }}</span>
