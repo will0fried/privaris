@@ -57,6 +57,47 @@ class EntryCrudController extends AbstractCrudController
     });
 })();
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script>
+(function () {
+    var SUFFIXES = ['[content]', '[objectif]', '[protocole]', '[observations]', '[retiens]'];
+    window.addEventListener('load', function () {
+        if (typeof EasyMDE === 'undefined') { return; }
+        var editors = [];
+        SUFFIXES.forEach(function (suffix) {
+            var ta = document.querySelector('textarea[name$="' + suffix + '"]');
+            if (!ta || ta.dataset.mdeReady) { return; }
+            ta.dataset.mdeReady = '1';
+            var mde = new EasyMDE({
+                element: ta,
+                spellChecker: false,
+                status: false,
+                autoDownloadFontAwesome: true,
+                minHeight: '160px',
+                uploadImage: true,
+                imageMaxSize: 8 * 1024 * 1024,
+                imageAccept: 'image/png, image/jpeg, image/webp, image/gif',
+                imageUploadEndpoint: '/admin/carnet/upload-image',
+                imageTexts: {
+                    sbInit: 'Glissez une image ici, collez-la (Cmd+V), ou utilisez le bouton image.',
+                    sbOnDragEnter: 'Déposez pour envoyer l\'image',
+                    sbOnDrop: 'Envoi de l\'image en cours…',
+                    sbProgress: 'Envoi ({{progress}}%)',
+                    sbOnUploaded: 'Image ajoutée'
+                },
+                errorMessages: { imageTooLarge: 'Image trop lourde (8 Mo maximum).' },
+                toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', 'code', '|', 'preview', 'guide']
+            });
+            editors.push(mde);
+        });
+        function refresh() { editors.forEach(function (e) { try { e.codemirror.refresh(); } catch (err) {} }); }
+        setTimeout(refresh, 80);
+        var sel = document.querySelector('select[name$="[type]"]');
+        if (sel) { sel.addEventListener('change', function () { setTimeout(refresh, 80); }); }
+    });
+})();
+</script>
 HTML;
 
         return $assets->addHtmlContentToBody($js);
