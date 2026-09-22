@@ -509,6 +509,7 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 .home .fiche-tech .ft-constats span{display:inline;font-size:14px;letter-spacing:0;text-transform:none;color:var(--text)}
 .home .fiche-tech .ft-constats span.retire{text-decoration:line-through;color:var(--dim)}
 @media(max-width:820px){.home .fiche-tech{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.home .fiche-tech{grid-template-columns:1fr}}
 
 /* --- Preuves : 4 tuiles-liens (ambre rare, au survol) --- */
 .home #preuves{padding:72px 0;border-top:1px solid var(--line)}
