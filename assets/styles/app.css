@@ -609,3 +609,16 @@ body.home{--bg2:#0E1013;--panel:#14171C;--panel2:#191D23;--line:#23272F;--line2:
 .home .seclabel .no{display:none}
 .home .seclabel::after{background:var(--line)}
 
+
+/* Mobile : resserrer le rythme vertical (les sections gardaient les marges desktop) */
+@media(max-width:640px){
+  .home .hero{padding:64px 0 44px}
+  .home .metrics{margin-top:40px}
+  .home .constat-major,
+  .home #constats-recents,
+  .home #entrees,
+  .home #preuves{padding:48px 0}
+  .home #apropos{padding:48px 0 60px}
+  .home .contact{padding:20px 0 56px}
+  .home .sec-head{margin-bottom:24px}
+}
