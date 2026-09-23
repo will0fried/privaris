@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Un abonné à la newsletter « Le relevé du dimanche ».
+ * Un abonné à la newsletter « Le relevé ».
  */
 #[ORM\Entity(repositoryClass: SubscriberRepository::class)]
 #[ORM\Table(name: '`subscriber`')]

@@ -225,8 +225,8 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="final reveal">
-      <h3>Le prochain constat tombe dimanche.</h3>
-      <p>Un résultat mesuré par semaine, dans ta boîte mail. Pas de bruit, pas de hype.</p>
+      <h3>Un nouveau constat par mois.</h3>
+      <p>Un résultat mesuré, dans ta boîte mail. Pas de bruit, pas de hype.</p>
       {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
       {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
       <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="formrow">

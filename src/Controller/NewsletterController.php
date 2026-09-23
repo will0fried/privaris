@@ -48,7 +48,7 @@ class NewsletterController extends AbstractController
         $existing = $subscribers->findOneByEmail($email);
 
         if ($existing && $existing->isConfirmed()) {
-            $this->addFlash('newsletter_success', 'Vous êtes déjà inscrit — à dimanche.');
+            $this->addFlash('newsletter_success', 'Vous êtes déjà inscrit — à bientôt.');
 
             return $this->redirectToRoute('app_home', ['_fragment' => 'contact']);
         }

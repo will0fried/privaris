@@ -45,7 +45,7 @@ class BrevoClient
 
         $html = $this->confirmationHtml($confirmUrl, $unsubscribeUrl);
         $text = "Bonjour,\n\n"
-            ."Vous avez demandé à recevoir « Le relevé du dimanche » de Privaris.\n"
+            ."Vous avez demandé à recevoir « Le relevé » de Privaris.\n"
             ."Confirmez votre inscription en ouvrant ce lien :\n$confirmUrl\n\n"
             ."Si vous n'êtes pas à l'origine de cette demande, ignorez ce message.\n\n"
             ."Se désinscrire : $unsubscribeUrl\n";
@@ -144,7 +144,7 @@ class BrevoClient
     <tr><td style="padding:8px 32px 4px;">
       <h1 style="margin:0 0 12px;font-size:20px;line-height:1.3;color:#EDEDE7;font-weight:700;">Confirmez votre inscription</h1>
       <p style="margin:0 0 20px;font-size:14px;line-height:1.65;color:#B7BCC4;">
-        Vous recevrez « Le relevé du dimanche » — un décryptage, un lab ou un writeup par semaine, sans bruit. Un dernier clic pour valider&nbsp;:
+        Vous recevrez « Le relevé » — un décryptage, un lab ou un writeup par mois, sans bruit. Un dernier clic pour valider&nbsp;:
       </p>
       <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border-radius:5px;background:#F6A733;">
         <a href="$confirm" style="display:inline-block;padding:13px 26px;font-size:14px;font-weight:600;color:#0A0B0D;text-decoration:none;letter-spacing:.02em;">Confirmer mon inscription</a>
