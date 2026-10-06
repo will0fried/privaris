@@ -25,7 +25,7 @@
   <div class="wrap">
     <span class="kick"><i aria-hidden="true"></i>Sécurité offensive · Défenses IA à l'épreuve</span>
     <h1>Je teste où l'IA <span class="g">craque</span> quand on lui confie la défense.</h1>
-    <p class="lead">Chaque entrée est un test que j'ai mené moi-même. Objectif, protocole, observations, ce que j'en retiens. Ce qu'elle établit devient un constat : une affirmation courte, datée, rattachée à l'entrée qui la démontre. <b>Peu de sources, beaucoup de résultats.</b></p>
+    <p class="lead">Chaque entrée est un test que j'ai mené moi-même. Objectif, protocole, observations, ce que j'en retiens. Ce qu'elle établit devient un constat : une affirmation courte, datée, rattachée à l'entrée qui la démontre. <b>Tout est rejouable.</b></p>
     <div class="herocta">
       <a class="btn p" href="#constat">Voir le dernier constat →</a>
       <a class="btn g" href="#entrees">Lire la méthode</a>
@@ -182,7 +182,7 @@
     <div class="about reveal">
       <div>
         <p>Mon mémoire de master portait sur les agents autonomes de cyberdéfense. Alors j'en ai construit un, je lui ai donné les commandes d'un réseau à défendre, et je l'ai regardé se tromper là où personne ne le montre. Privaris, c'est l'endroit où je continue ce travail en public, résultat par résultat.</p>
-        <p>En parallèle, je dirige un magasin Orange et je suis en reconversion vers la sécurité offensive. Ce qui m'intéresse, c'est le croisement entre le pentest et l'automatisation&nbsp;: comprendre pourquoi les outils censés défendre, agents et LLM compris, laissent passer ce qu'un humain aurait vu.</p>
+        <p>En parallèle, je dirige un magasin Orange et je passe mes soirées sur la sécurité offensive. Ce qui m'intéresse&nbsp;: comprendre pourquoi les outils censés défendre, agents et LLM compris, laissent passer ce qu'un humain aurait vu.</p>
         <div class="sig">will0fried</div>
       </div>
       <div class="facts">
@@ -226,7 +226,7 @@
   <div class="wrap">
     <div class="final reveal">
       <h3>Un nouveau constat par mois.</h3>
-      <p>Un résultat mesuré, dans ta boîte mail. Pas de bruit, pas de hype.</p>
+      <p>Un résultat mesuré par mois, dans ta boîte mail. Rien d'autre.</p>
       {% for message in app.flashes('newsletter_success') %}<p class="flash ok">{{ message }}</p>{% endfor %}
       {% for message in app.flashes('newsletter_error') %}<p class="flash err">{{ message }}</p>{% endfor %}
       <form method="post" action="{{ path('app_newsletter_subscribe') }}" class="formrow">

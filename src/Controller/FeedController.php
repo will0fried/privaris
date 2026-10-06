@@ -51,8 +51,6 @@ class FeedController extends AbstractController
 
         $content = "User-agent: *\n"
             ."Allow: /\n"
-            ."Disallow: /admin\n"
-            ."Disallow: /connexion\n"
             ."Sitemap: ".$sitemap."\n";
 
         return new Response($content, Response::HTTP_OK, [
